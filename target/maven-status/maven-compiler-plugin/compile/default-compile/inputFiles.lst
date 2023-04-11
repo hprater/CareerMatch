@@ -1,5 +1,5 @@
-/Users/haydenprater/School/2023Spring/DatabaseManagement/DBfinalProject/src/main/java/edu/uark/csce/databasehb/data/Person.java
+/Users/haydenprater/School/2023Spring/DatabaseManagement/DBfinalProject/src/main/java/edu/uark/csce/databasehb/web/WebController.java
+/Users/haydenprater/School/2023Spring/DatabaseManagement/DBfinalProject/src/main/java/edu/uark/csce/databasehb/data/Student.java
 /Users/haydenprater/School/2023Spring/DatabaseManagement/DBfinalProject/src/main/java/edu/uark/csce/databasehb/Application.java
-/Users/haydenprater/School/2023Spring/DatabaseManagement/DBfinalProject/src/main/java/edu/uark/csce/databasehb/web/GreetingController.java
-/Users/haydenprater/School/2023Spring/DatabaseManagement/DBfinalProject/src/main/java/edu/uark/csce/databasehb/data/PersonRepository.java
 /Users/haydenprater/School/2023Spring/DatabaseManagement/DBfinalProject/src/main/java/edu/uark/csce/databasehb/data/Initialize.java
+/Users/haydenprater/School/2023Spring/DatabaseManagement/DBfinalProject/src/main/java/edu/uark/csce/databasehb/data/StudentRepository.java
