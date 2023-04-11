@@ -10,7 +10,7 @@ applications:
   routes:
   - route: hbprater.apps.dhaka.cf-app.com
   - route: baileyg.apps.dhaka.cf-app.com
-  path: target/demo-0.0.1-SNAPSHOT.jar
+  path: target/dbfinalproject-0.0.1-SNAPSHOT.jar
   services:
   - uofa-mysql
   env:

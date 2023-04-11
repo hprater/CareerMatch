@@ -1,3 +1,3 @@
-# cf-mysql-demo
+# DBfinalProject
 
-TAS/CF Spring Boot Application with MariaDB autoconfigured
+Spring Boot Application with MariaDB autoconfigured
