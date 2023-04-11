@@ -1,4 +1,4 @@
-package net.starkenberg.uofa.demo.data;
+package edu.uark.csce.databasehb.data;
 
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;

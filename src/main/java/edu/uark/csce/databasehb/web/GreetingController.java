@@ -1,6 +1,6 @@
-package net.starkenberg.uofa.demo.web;
+package edu.uark.csce.databasehb.web;
 
-import net.starkenberg.uofa.demo.data.PersonRepository;
+import edu.uark.csce.databasehb.data.PersonRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

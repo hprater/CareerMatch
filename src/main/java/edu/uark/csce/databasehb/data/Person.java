@@ -1,4 +1,4 @@
-package net.starkenberg.uofa.demo.data;
+package edu.uark.csce.databasehb.data;
 
 public class Person {
     private long id;
