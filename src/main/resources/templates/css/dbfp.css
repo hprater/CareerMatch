@@ -147,6 +147,12 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
 .dbfp-button:hover{color:#000!important;background-color:#ccc!important}
 .dbfp-transparent,.dbfp-hover-none:hover{background-color:transparent!important}
 .dbfp-hover-none:hover{box-shadow:none!important}
+
+/* Hayden Created */
+.dbfp-video-container{position: relative;}
+.dbfp-video-container video{height: 100vh; width: 100%; position: absolute; z-index: 0; object-fit: cover;}
+.dbfp-text-box {position:absolute;top:0;left:0;z-index:1;background: rgba(0, 0, 0, 0.5);color: #f1f1f1;width: 100%;padding: 20px;text-align: center; font-style: oblique}
+
 /* Colors */
 .dbfp-amber,.dbfp-hover-amber:hover{color:#000!important;background-color:#ffc107!important}
 .dbfp-aqua,.dbfp-hover-aqua:hover{color:#000!important;background-color:#00ffff!important}
@@ -232,5 +238,3 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
 .dbfp-border-dark-grey,.dbfp-hover-border-dark-grey:hover,.dbfp-border-dark-gray,.dbfp-hover-border-dark-gray:hover{border-color:#616161!important}
 .dbfp-border-pale-red,.dbfp-hover-border-pale-red:hover{border-color:#ffe7e7!important}.dbfp-border-pale-green,.dbfp-hover-border-pale-green:hover{border-color:#e7ffe7!important}
 .dbfp-border-pale-yellow,.dbfp-hover-border-pale-yellow:hover{border-color:#ffffcc!important}.dbfp-border-pale-blue,.dbfp-hover-border-pale-blue:hover{border-color:#e7ffff!important}
-.dbfp-video-container{position: relative;}
-.dbfp-video-container video{height: 100vh; width: 100%; position: absolute; z-index: 10; object-fit: cover;}
