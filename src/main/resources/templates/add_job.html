@@ -2,9 +2,76 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>DB Project: addJob</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/dbfp.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" href="https://arkansasrazorbacks.com/favicon.ico">
+    <style>
+        body, h1, h2, h3, h4, h5, h6 {
+            font-family: "Montserrat", sans-serif
+        }
+
+        .dbfp-row-padding img {
+            margin-bottom: 12px
+        }
+
+        /* Set the width of the sidebar to 120px */
+        .dbfp-sidebar {
+            width: 140px;
+            background: #222;
+        }
+
+        /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+        #main {
+            margin-left: 120px
+        }
+
+        /* Remove margins from "page content" on small screens */
+        @media only screen and (max-width: 600px) {
+            #main {
+                margin-left: 0
+            }
+        }
+    </style>
 </head>
-<body>
-<p th:text="'Hello, ' + ${name} + '!'" />
+<body class="dbfp-black">
+<!-- Icon Bar (Sidebar - hidden on small screens) -->
+<nav class="dbfp-sidebar dbfp-bar-block dbfp-small dbfp-hide-small dbfp-center">
+    <!-- Avatar image in top left corner -->
+    <img src="images/uofa.jpg" style="width:100%">
+    <a href="/" class="dbfp-bar-item dbfp-button dbfp-padding-large dbfp-hover-black">
+        <i class="fa fa-home dbfp-xxlarge"></i>
+        <p>HOME</p>
+    </a>
+    <a href="/addStudent" class="dbfp-bar-item dbfp-button dbfp-padding-large dbfp-hover-black">
+        <i class="fa fa-user dbfp-xxlarge"></i>
+        <p>STUDENT</p>
+    </a>
+    <a href="#" class="dbfp-bar-item dbfp-button dbfp-padding-large dbfp-black">
+        <i class="fa fa-envelope dbfp-xxlarge"></i>
+        <p>JOB</p>
+    </a>
+    <a href="/addApplication" class="dbfp-bar-item dbfp-button dbfp-padding-large dbfp-hover-black">
+        <i class="fa fa-envelope dbfp-xxlarge"></i>
+        <p>APPLICATION</p>
+    </a>
+    <a href="/viewStudent" class="dbfp-bar-item dbfp-button dbfp-padding-large dbfp-hover-black">
+        <i class="fa fa-eye dbfp-xxlarge"></i>
+        <p>VIEW STUDENTS</p>
+    </a>
+    <a href="/viewJob" class="dbfp-bar-item dbfp-button dbfp-padding-large dbfp-hover-black">
+        <i class="fa fa-eye dbfp-xxlarge"></i>
+        <p>VIEW JOBS</p>
+    </a>
+    <a href="/viewApplication" class="dbfp-bar-item dbfp-button dbfp-padding-large dbfp-hover-black">
+        <i class="fa fa-eye dbfp-xxlarge"></i>
+        <p>VIEW APPLICATION</p>
+    </a>
+</nav>
+<div class="dbfp-padding-large" id="main">
+    <p th:text="'Hello, ' + ${name} + '!'" />
+</div>
 </body>
 </html>
