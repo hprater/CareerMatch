@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class WebController {
 
-    private final StudentRepository repo;
+    private final StudentRepository studentRepo;
 
-    public WebController(StudentRepository repo) {
-        this.repo = repo;
+    public WebController(StudentRepository studentRepo) {
+        this.studentRepo = studentRepo;
     }
 
     @GetMapping("/addStudent")
@@ -57,7 +57,11 @@ public class WebController {
 
     @PostMapping("/addStudent")
     public String addStudent(@RequestBody StudentForm form) {
-        //Then call method from student repository to do query by passing the form to it.
+        if(form.isValid()){
+            studentRepo.addStudent(form);
+        }else{
+            // Notify the user of invalid input
+        }
         System.out.println(form);
         return "add_student";
     }
