@@ -24,13 +24,15 @@
       }
 
       /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
-      #main {
-        margin-left: 120px
+      #main2 {
+        margin-right: 200px;
+        margin-left: 200px
       }
 
       /* Remove margins from "page content" on small screens */
       @media only screen and (max-width: 600px) {
-        #main {
+        #main2 {
+          margin-right: 0;
           margin-left: 0
         }
       }
@@ -53,7 +55,7 @@
         <i class="fa fa-suitcase dbfp-xxlarge"></i>
         <p>JOB</p>
       </a>
-      <a href="/addApplication" class="dbfp-bar-item dbfp-button dbfp-padding-large dbfp-hover-black">
+      <a href="#" class="dbfp-bar-item dbfp-button dbfp-padding-large dbfp-hover-black">
         <i class="fa fa-edit dbfp-xxlarge"></i>
         <p>APPLICATION</p>
       </a>
@@ -70,8 +72,20 @@
         <p>VIEW APPLICATION</p>
       </a>
     </nav>
-    <div class="dbfp-padding-large" id="main">
+    <div class="dbfp-padding-large" id="main2">
       <p th:text="'Hello, ' + ${name} + '!'"/>
+      <h2 style="font-family:Castellar; font-size: 40px"> Add Application </h2>
+
+      <form action="/addApplication" target="_blank">
+        <p><input class="dbfp-input dbfp-padding-16" type="text" placeholder="Student ID" required name="Student ID"></p>
+        <p><input class="dbfp-input dbfp-padding-16" type="text" placeholder="Job ID" required name="Job ID"></p>
+        <p>
+          <button class="dbfp-button dbfp-light-grey dbfp-padding-large" type="submit">
+            <i class="fa fa-paper-plane"></i> SUBMIT
+          </button>
+        </p>
+      </form>
+      <img src="images/hog.jpg" style="width:50%" class="dbfp-center-mypic">
     </div>
   </body>
 </html>
