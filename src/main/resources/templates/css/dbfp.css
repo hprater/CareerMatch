@@ -153,6 +153,7 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
 .dbfp-video-container{position: relative;}
 .dbfp-video-container video{height: 100vh; width: 100%; position: absolute; z-index: 0; object-fit: cover;}
 .dbfp-text-box {position:absolute;top:0;left:0;z-index:1;background: rgba(0, 0, 0, 0.5);color: #f1f1f1;width: 100%;padding: 20px;text-align: center; font-style: oblique}
+.dbfp-center-mypic{display: block; margin-left: auto; margin-right: auto; width: 50%;}
 
 
 /* Colors */
