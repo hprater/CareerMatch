@@ -24,13 +24,15 @@
       }
 
       /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
-      #main {
-        margin-left: 120px
+      #main2 {
+        margin-right: 200px;
+        margin-left: 200px
       }
 
       /* Remove margins from "page content" on small screens */
       @media only screen and (max-width: 600px) {
-        #main {
+        #main2 {
+          margin-right: 0;
           margin-left: 0
         }
       }
@@ -70,8 +72,19 @@
         <p>VIEW APPLICATION</p>
       </a>
     </nav>
-    <div class="dbfp-padding-large" id="main">
+    <div class="dbfp-padding-large" id="main2">
       <p th:text="'Hello, ' + ${name} + '!'"/>
+      <h2 style="font-family:Castellar; font-size: 40px" > View all Jobs for Selected Major </h2>
+
+      <form action="/viewJob" target="_blank" >
+        <p><input class="dbfp-input dbfp-padding-16" type="text" placeholder="Major" required name="Major"></p>
+        <p>
+          <button class="dbfp-button dbfp-light-grey dbfp-padding-large" type="submit">
+            <i class="fa fa-paper-plane"></i> SUBMIT
+          </button>
+        </p>
+      </form>
+      <img src="images/hog.jpg" style="width:50%" class = "dbfp-mid-mypic">
     </div>
   </body>
 </html>

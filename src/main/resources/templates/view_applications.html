@@ -24,13 +24,15 @@
       }
 
       /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
-      #main {
-        margin-left: 120px
+      #main2 {
+        margin-right: 200px;
+        margin-left: 200px
       }
 
       /* Remove margins from "page content" on small screens */
       @media only screen and (max-width: 600px) {
-        #main {
+        #main2 {
+          margin-right: 0;
           margin-left: 0
         }
       }
@@ -70,8 +72,27 @@
         <p>VIEW APPLICATION</p>
       </a>
     </nav>
-    <div class="dbfp-padding-large" id="main">
+    <div class="dbfp-padding-large" id="main2">
       <p th:text="'Hello, ' + ${name} + '!'"/>
+      <h2 style="font-family:Castellar; font-size: 40px"> View All Applications </h2>
+      <p>How would you like to search?</p>
+
+      <form action="/viewApplication" target="_blank">
+        <input type="radio" id="all" name="applications" value="ALL">
+        <label for="all">View All Applications</label><br>
+        <input type="radio" id="major" name="applications" value="MAJOR">
+        <label for="major">View All Applications by Major</label><br>
+        <input type="radio" id="student" name="applications" value="STUDENT">
+        <label for="student">View All Applications by Student ID</label><br>
+        <input type="radio" id="job" name="applications" value="JOB">
+        <label for="job">View All Applications by Specific Job</label><br>
+        <p>
+          <button class="dbfp-button dbfp-light-grey dbfp-padding-large" type="submit">
+            <i class="fa fa-paper-plane"></i> SUBMIT
+          </button>
+        </p>
+      </form>
+      <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
     </div>
   </body>
 </html>
