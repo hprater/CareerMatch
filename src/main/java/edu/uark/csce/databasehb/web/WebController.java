@@ -1,5 +1,6 @@
 package edu.uark.csce.databasehb.web;
 
+import edu.uark.csce.databasehb.data.JobRepository;
 import edu.uark.csce.databasehb.data.StudentRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class WebController {
 
     private final StudentRepository studentRepo;
+    private final JobRepository jobRepo;
 
-    public WebController(StudentRepository studentRepo) {
+    public WebController(StudentRepository studentRepo, JobRepository jobRepo) {
         this.studentRepo = studentRepo;
+        this.jobRepo = jobRepo;
     }
 
     @GetMapping("/addStudent")
