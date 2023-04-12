@@ -1,0 +1,14 @@
+version: '3.3'
+services:
+  service_instance_db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'service_instance_db'
+      MYSQL_USER: 'd83920e781c94554b8f12c8b886ac211'
+      MYSQL_PASSWORD: 'l9wvh6x9r9829lsz'
+      MYSQL_ROOT_PASSWORD: 'l9wvh6x9r9829lsz'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'

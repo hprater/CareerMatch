@@ -28,4 +28,7 @@ public class StudentForm {
     public void setMajorId(String majorId) {
         this.majorId = majorId;
     }
+
+    //create method check if inputs are valid.boolean
+
 }

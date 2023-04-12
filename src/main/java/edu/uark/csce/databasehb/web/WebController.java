@@ -57,6 +57,7 @@ public class WebController {
 
     @PostMapping("/addStudent")
     public String addStudent(@RequestBody StudentForm form) {
+        //Then call method from student repository to do query by passing the form to it.
         System.out.println(form);
         return "add_student";
     }
