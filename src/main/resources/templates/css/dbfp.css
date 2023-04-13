@@ -155,6 +155,15 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
 .dbfp-my-box {position:absolute;top:0;left:0;z-index:1;background:rgba(0, 0, 0, 0.5);color:#f1f1f1;width:100%;padding:20px;text-align:center;font-style:oblique}
 .dbfp-mid-mypic{display:block;margin-left:auto;margin-right:auto;width:50%}
 
+/*Table*/
+.dbfp-content-table {border-collapse: collapse;font-size: 0.9em;min-width: 400px;border-radius: 5px 5px 5px 5px;overflow: hidden;box-shadow: 0 0 20px rgba(255,255,255,1.5);margin: 25px auto;}
+.dbfp-content-table thead tr {background-color: #943126 ;color: white;text-align: left;border-bottom: 2px solid #fcfcfc;}
+.dbfp-content-table th, .dbfp-content-table td {padding: 12px 15px;}
+.dbfp-content-table tbody tr {border-bottom: 1px solid #fcfcfc;background-color: lightgray; color: black;}
+.dbfp-content-table tbody tr:nth-of-type(even) {background-color: white;color: black}
+.dbfp-content-table tbody tr:last-of-type {border-bottom: 3px solid #943126;}
+
+
 
 /* Colors */
 .dbfp-amber,.dbfp-hover-amber:hover{color:#000!important;background-color:#ffc107!important}

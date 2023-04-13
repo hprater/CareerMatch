@@ -87,12 +87,16 @@
         <!-- add your message later snackbar/toast -->
         <img src="images/hog.jpg" style="width:50%" class = "dbfp-mid-mypic">
       </div>
-      <table th:unless="${#lists.isEmpty(students)}">
+      <table class = "dbfp-content-table" th:unless="${#lists.isEmpty(students)}">
+        <thead>
         <tr><th>Student ID</th><th>Student Name</th></tr>
+        </thead>
+        <tbody>
         <tr th:each="student : ${students}">
           <td th:text="${student.getId()}"></td>
           <td th:text="${student.getStudentName()}"></td>
         </tr>
+        </tbody>
       </table>
     </div>
   </body>
