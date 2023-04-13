@@ -5,6 +5,7 @@ public class JobForm {
     private String companyName;
     private String jobTitle;
     private String salary;
+    private String desiredMajor;
 
     public String getJobId() {
         return jobId;
@@ -29,12 +30,21 @@ public class JobForm {
     public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
     }
+
     public String getSalary() {
         return salary;
     }
 
     public void setSalary(String salary) {
         this.salary = salary;
+    }
+
+    public String getDesiredMajor() {
+        return desiredMajor;
+    }
+
+    public void setDesiredMajor(String desiredMajor) {
+        this.desiredMajor = desiredMajor;
     }
 
     //create method check if inputs are valid.boolean

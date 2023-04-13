@@ -78,17 +78,19 @@
 
       <form action="/viewStudent" target="_blank" >
         <p><select name = "major" id="major" class="dbfp-input dbfp-padding-16" >
-          <option value = "Undecided">Undecided</option>
-          <option value = "BSCS">Computer Science (BSCS)</option>
-          <option value = "BSCmpE">Computer Engineering (BSCmpE)</option>
-          <option value = "BSChE">Chemical Engineering (BSChE)</option>
-          <option value = "BSCE">Civil Engineering (BSCE)</option>
-          <option value = "BSEE">Electrical Engineering (BSEE)</option>
-          <option value = "BSME">Mechanical Engineering (BSME)</option>
-          <option value = "BSIE">Industrial Engineering (BSIE)</option>
-          <option value = "BSBmE">Biomedical Engineering (BSBmE)</option>
-          <option value = "BSBE">Biological and Agricultural Engineering (BSBE)</option>
-          <option value = "BSDTSC">Data Science (BSDTSC)</option>
+          <optgroup label="Major">
+            <option value = "General">Undecided</option>
+            <option value = "BSCS">Computer Science (BSCS)</option>
+            <option value = "BSCmpE">Computer Engineering (BSCmpE)</option>
+            <option value = "BSChE">Chemical Engineering (BSChE)</option>
+            <option value = "BSCE">Civil Engineering (BSCE)</option>
+            <option value = "BSEE">Electrical Engineering (BSEE)</option>
+            <option value = "BSME">Mechanical Engineering (BSME)</option>
+            <option value = "BSIE">Industrial Engineering (BSIE)</option>
+            <option value = "BSBmE">Biomedical Engineering (BSBmE)</option>
+            <option value = "BSBE">Biological and Agricultural Engineering (BSBE)</option>
+            <option value = "BSDTSC">Data Science (BSDTSC)</option>
+          </optgroup>
         </select></p>
         <p>
           <button class="dbfp-button dbfp-light-grey dbfp-padding-large" type="submit">
