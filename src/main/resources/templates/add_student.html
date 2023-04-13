@@ -76,7 +76,7 @@
       <p th:text="'Hello, ' + ${name} + '!'"/>
       <h2 style="font-family:Castellar; font-size: 40px" > Add Student</h2>
 
-      <form action="/addStudent" target="_blank" >
+      <form action="addStudent" target="_self" method="post">
         <p><input id="studentId" class="dbfp-input dbfp-padding-16" type="text" placeholder="Student ID" required name="Student ID"></p>
         <p><input id="studentName" class="dbfp-input dbfp-padding-16" type="text" placeholder="Name" required name="Name"></p>
         <p><select name = "major" id="major" class="dbfp-input dbfp-padding-16" >
