@@ -4,10 +4,7 @@ import edu.uark.csce.databasehb.data.JobRepository;
 import edu.uark.csce.databasehb.data.StudentRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class WebController {
@@ -59,11 +56,12 @@ public class WebController {
     }
 
     @PostMapping("/addStudent")
-    public String addStudent(@RequestBody StudentForm form) {
+    public String addStudent(@ModelAttribute StudentForm form, Model model) {
         if(form.isValid()){
             studentRepo.addStudent(form);
+            model.addAttribute("formResult", form.getStudentName() + " inserted to database.");
         }else{
-            // Notify the user of invalid input
+            model.addAttribute("formResult", "Invalid input.");
         }
         System.out.println(form);
         return "add_student";
