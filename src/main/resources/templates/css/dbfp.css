@@ -154,23 +154,6 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
 .dbfp-video-container video{height:100vh;width:100%;position:absolute;z-index:0;object-fit:cover}
 .dbfp-my-box {position:absolute;top:0;left:0;z-index:1;background:rgba(0, 0, 0, 0.5);color:#f1f1f1;width:100%;padding:20px;text-align:center;font-style:oblique}
 .dbfp-mid-mypic{display:block;margin-left:auto;margin-right:auto;width:50%}
-#containerBox {
-    display: none;
-    background-image: linear-gradient(to right, #66a80f, #c0eb75);
-    background-size:cover;
-    color: white;
-    position: absolute;
-    width: 350px;
-    border-radius: 5px;
-    left: 50%;
-    margin-left: -160px;
-    padding: 16px 8px 8px;
-    box-sizing: border-box;
-}
-#containerBox .message {
-    text-align: left;
-    padding: 10px 30px;
-}
 
 
 /* Colors */
