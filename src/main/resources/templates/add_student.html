@@ -100,8 +100,10 @@
         </p>
       </form>
       <img src="images/hog.jpg" style="width:50%" class = "dbfp-mid-mypic">
-      <div class = "dbfp-my-box">
-        <p th:text="${formResult}"/>
+      <div id = "containerBox">
+        <div class="message">
+          <p th:text="${formResult}"/>
+        </div>
       </div>
     </div>
   </body>
