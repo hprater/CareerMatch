@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ToastMessage {
-    private static final String baseClass = "alert alert-dismissible fade show";
+    private static final String baseClass = " alert-dismissible fade show";
     private String cssClass = "alert alert-success alert-dismissible fade show";
     private String message = "Everything worked as expected";
 

@@ -88,11 +88,11 @@ public class WebController {
                 studentRepo.addStudent(form);
                 toast.setMessage(form.getStudentName() + " has been added to the database.");
             } catch (Exception e) {
-                toast.setCssClass("alert alert-danger alert-dismissible fade show");
+                toast.setCssClass("alert alert-danger");
                 toast.setMessage(e.getMessage());
             }
         }else{
-            toast.setCssClass("alert alert-warning alert-dismissible fade show");
+            toast.setCssClass("alert alert-warning");
             toast.setMessage("Invalid Value(s) in form");
         }
         log.info("Toast: {}", toast);
