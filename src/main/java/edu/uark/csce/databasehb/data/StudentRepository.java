@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("SqlNoDataSourceInspection")
 @Repository
 public class StudentRepository {
     private final JdbcTemplate template;
@@ -15,15 +16,13 @@ public class StudentRepository {
         this.template = template;
     }
 
-    public Student getStudents(String major) {
-        List<Student> students = new ArrayList<>();
-        template.query("SELECT student_id, student_name, major FROM students WHERE major = ?", new Object[]{major},
-                (rs, rowNum) -> new Student(rs.getLong("student_id"), rs.getString("student_name"), rs.getString("major"))
-        ).forEach(students::add);
-        return students.isEmpty() ? null : students.get(0);
+    public List<Student> getStudents(String major) {
+        List<Student> students = new ArrayList<>(template.query("SELECT student_id, student_name, major FROM students WHERE major = ?",
+                (rs, rowNum) -> new Student(rs.getLong("student_id"), rs.getString("student_name"), rs.getString("major")), major));
+        return students.isEmpty() ? null : students;
     }
 
-    public void addStudent(StudentForm form){
-        // Do a query to insert the student based on the form data
+    public void addStudent(StudentForm form) {
+        template.update("INSERT INTO students (student_id, student_name, major) VALUES (?, ?, ?)", form.getStudentId(), form.getStudentName(), form.getMajor());
     }
 }
