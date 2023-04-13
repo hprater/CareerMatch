@@ -82,13 +82,21 @@ public class WebController {
 
     @PostMapping("/addStudent")
     public String addStudent(@ModelAttribute StudentForm form, Model model) {
+        ToastMessage toast = new ToastMessage();
         if(form.isValid()){
-            studentRepo.addStudent(form);
-            model.addAttribute("formResult", form.getStudentName() + " inserted to database.");
+            try{
+                studentRepo.addStudent(form);
+                toast.setMessage(form.getStudentName() + " has been added to the database.");
+            } catch (Exception e) {
+                toast.setCssClass("alert-danger");
+                toast.setMessage(e.getMessage());
+            }
         }else{
-            model.addAttribute("formResult", "Invalid input.");
+            toast.setCssClass("alert-warning");
+            toast.setMessage("Invalid Value(s) in form");
         }
-        System.out.println(form);
+        log.info("Toast: {}", toast);
+        model.addAttribute("toast", toast);
         List<Major> majors = majorRepository.getAllMajors();
         model.addAttribute("majors", majors);
         return "add_student";

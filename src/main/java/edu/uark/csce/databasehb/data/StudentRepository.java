@@ -1,6 +1,8 @@
 package edu.uark.csce.databasehb.data;
 
 import edu.uark.csce.databasehb.web.StudentForm;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -24,6 +26,10 @@ public class StudentRepository {
     }
 
     public void addStudent(StudentForm form) {
-        template.update("INSERT INTO students (student_id, student_name, major_id) VALUES (?, ?, ?)", form.getStudentId(), form.getStudentName(), form.getMajor());
+        try {
+            template.update("INSERT INTO students (student_id, student_name, major_id) VALUES (?, ?, ?)", form.getStudentId(), form.getStudentName(), form.getMajor());
+        } catch (DataIntegrityViolationException dup) {
+            template.update("UPDATE students SET student_name = ?, major_id = ? WHERE student_id = ?", form.getStudentName(), form.getMajor(), form.getStudentId());
+        }
     }
 }
