@@ -1,5 +1,8 @@
 package edu.uark.csce.databasehb.web;
 
+import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNumeric;
+
 public class StudentForm {
     private String studentId;
     private String studentName;
@@ -31,26 +34,16 @@ public class StudentForm {
 
     //create method check if inputs are valid.boolean
     public boolean isValid() {
-        // Check for studentId validity
-        int checkStudentId = this.studentId.indexOf(";"); // If -1, then no semicolons exist
-
         // Ensure studentId was entered as a number
-        try {
-            Integer.parseInt(this.studentId);
-        } catch (NumberFormatException e) {
-            return false;
-        }
+        if(!isNumeric(this.studentId)) return false;
 
         // Check for studentName validity
-        int checkStudentName = this.studentName.indexOf(";");
+        if(isBlank(this.studentName) || this.studentName.contains(";")) return false;
 
         // Check for major validity
-        int checkMajor = this.major.indexOf(";");
+        if(isBlank(this.major) || this.major.contains(";")) return false;
 
-        if(checkStudentId == -1 && checkStudentName == -1 && checkMajor == -1)
-            return true;
-
-        return false;
+        return true;
     }
 
 }
