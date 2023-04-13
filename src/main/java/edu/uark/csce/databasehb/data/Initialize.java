@@ -23,7 +23,7 @@ public class Initialize {
         jdbcTemplate.execute("DROP TABLE IF EXISTS majors");
 
 
-        jdbcTemplate.execute("CREATE TABLE majors(major_id INT NOT NULL AUTO_INCREMENT, major VARCHAR(6), major_desc VARCHAR (155), PRIMARY KEY (major_id));");
+        jdbcTemplate.execute("CREATE TABLE majors(major_id INT NOT NULL AUTO_INCREMENT, major VARCHAR(8), major_desc VARCHAR (155), PRIMARY KEY (major_id));");
         jdbcTemplate.execute("INSERT INTO majors(major, major_desc) VALUES ('General','Undecided'), ('BSCS','Bachelor of Science in Computer Science'),('BSCmpE','Bachelor of Science in Computer Engineering'), ('BSChE', 'Bachelor of Science in Chemical Engineering')," +
                                 "('BSCE', 'Bachelor of Science in Civil Engineering'), ('BSEE', 'Bachelor of Science in Electrical Engineering'), ('BSME', 'Bachelor of Science in Mechanical Engineering'), ('BSIE', 'Bachelor of Science in Industrial Engineering')," +
                                 "('BSBmE', 'Bachelor of Science in Biomedical Engineering'), ('BSBE', 'Bachelor of Science in Biological and Agricultural Engineering'), ('BSDTSC', 'Bachelor of Science in Data Science');");
