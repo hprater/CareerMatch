@@ -16,13 +16,14 @@ public class StudentRepository {
         this.template = template;
     }
 
-    public List<Student> getStudents(String major) {
-        List<Student> students = new ArrayList<>(template.query("SELECT student_id, student_name, major FROM students WHERE major = ?",
+    public List<Student> getStudentsByMajor(int major) {
+        List<Student> students = new ArrayList<>(template.query(
+                        "SELECT student_id, student_name, major FROM students s, majors m WHERE s.major_id = m.major_id AND m.major_id = ?;",
                 (rs, rowNum) -> new Student(rs.getLong("student_id"), rs.getString("student_name"), rs.getString("major")), major));
         return students.isEmpty() ? null : students;
     }
 
     public void addStudent(StudentForm form) {
-        template.update("INSERT INTO students (student_id, student_name, major) VALUES (?, ?, ?)", form.getStudentId(), form.getStudentName(), form.getMajor());
+        template.update("INSERT INTO students (student_id, student_name, major_id) VALUES (?, ?, ?)", form.getStudentId(), form.getStudentName(), form.getMajor());
     }
 }

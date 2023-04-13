@@ -1,17 +1,23 @@
 package edu.uark.csce.databasehb.web;
 
+import edu.uark.csce.databasehb.data.Major;
+
+import java.util.List;
+
+import static org.apache.commons.lang3.StringUtils.isBlank;
+
 public class JobForm {
-    private String jobId;
+    private int jobId;
     private String companyName;
     private String jobTitle;
-    private String salary;
-    private String desiredMajor;
+    private double salary;
+    private List<Integer> desiredMajors;
 
-    public String getJobId() {
+    public int getJobId() {
         return jobId;
     }
 
-    public void setJobId(String jobId) {
+    public void setJobId(int jobId) {
         this.jobId = jobId;
     }
 
@@ -31,21 +37,25 @@ public class JobForm {
         this.jobTitle = jobTitle;
     }
 
-    public String getSalary() {
+    public double getSalary() {
         return salary;
     }
 
-    public void setSalary(String salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 
-    public String getDesiredMajor() {
-        return desiredMajor;
+    public List<Integer> getDesiredMajors() {
+        return desiredMajors;
     }
 
-    public void setDesiredMajor(String desiredMajor) {
-        this.desiredMajor = desiredMajor;
+    public void setDesiredMajors(List<Integer> desiredMajors) {
+        this.desiredMajors = desiredMajors;
     }
 
     //create method check if inputs are valid.boolean
+    public Boolean isValid() {
+        if(isBlank(companyName)) return false;
+        return true;
+    }
 }

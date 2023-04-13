@@ -4,15 +4,15 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNumeric;
 
 public class StudentForm {
-    private String studentId;
+    private Integer studentId;
     private String studentName;
-    private String major;
+    private Integer major;
 
-    public String getStudentId() {
+    public Integer getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(String studentId) {
+    public void setStudentId(Integer studentId) {
         this.studentId = studentId;
     }
 
@@ -24,24 +24,24 @@ public class StudentForm {
         this.studentName = studentName;
     }
 
-    public String getMajor() {
+    public Integer getMajor() {
         return major;
     }
 
-    public void setMajor(String major) {
+    public void setMajor(Integer major) {
         this.major = major;
     }
 
     //create method check if inputs are valid.boolean
     public boolean isValid() {
         // Ensure studentId was entered as a number
-        if(!isNumeric(this.studentId)) return false;
+        if(this.studentId < 1) return false;
 
         // Check for studentName validity
         if(isBlank(this.studentName) || this.studentName.contains(";")) return false;
 
         // Check for major validity
-        if(isBlank(this.major) || this.major.contains(";")) return false;
+        if(this.major < 1) return false;
 
         return true;
     }

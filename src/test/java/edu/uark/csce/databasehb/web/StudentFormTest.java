@@ -19,44 +19,37 @@ class StudentFormTest {
 
     @Test
     void isValidTrue() {
-        form.setStudentId("1");
+        form.setStudentId(11);
         form.setStudentName("Hayden");
-        form.setMajor("none");
+        form.setMajor(1);
         assertTrue(form.isValid());
     }
     @Test
     void isValidFalseNameIsEmpty() {
-        form.setStudentId("1");
+        form.setStudentId(1);
         form.setStudentName("");
-        form.setMajor("none");
+        form.setMajor(1);
         assertFalse(form.isValid());
     }
     @Test
-    void isValidFalseMajorIsEmpty() {
-        form.setStudentId("1");
+    void isValidFalseMajorIsNegative() {
+        form.setStudentId(1);
         form.setStudentName("Bailey");
-        form.setMajor("");
+        form.setMajor(-1);
+        assertFalse(form.isValid());
+    }
+    @Test
+    void isValidFalseStudentIdIsNegative() {
+        form.setStudentId(-1);
+        form.setStudentName("Bailey");
+        form.setMajor(1);
         assertFalse(form.isValid());
     }
     @Test
     void isValidFalseNameHasSemiColon() {
-        form.setStudentId("1");
+        form.setStudentId(1);
         form.setStudentName(";DROP TABLE students;");
-        form.setMajor("123");
-        assertFalse(form.isValid());
-    }
-    @Test
-    void isValidFalseIdHasSemiColon() {
-        form.setStudentId("1;");
-        form.setStudentName("Barney");
-        form.setMajor("123");
-        assertFalse(form.isValid());
-    }
-    @Test
-    void isValidFalseNonNumericStudentId() {
-        form.setStudentId("abc");
-        form.setStudentName("Fred");
-        form.setMajor("PHYL");
+        form.setMajor(123);
         assertFalse(form.isValid());
     }
 }
