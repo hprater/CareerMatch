@@ -24,10 +24,12 @@ public class Initialize {
 
 
         jdbcTemplate.execute("CREATE TABLE majors(major_id INT NOT NULL AUTO_INCREMENT, major VARCHAR(6), major_desc VARCHAR (155), PRIMARY KEY (major_id));");
-        jdbcTemplate.execute("INSERT INTO majors(major, major_desc) VALUES ('BSCE','Bachelor of Science in Computer Engineering'), ('BSCS', 'Bachelor of Science in Computer Science');");
+        jdbcTemplate.execute("INSERT INTO majors(major, major_desc) VALUES ('General','Undecided'), ('BSCS','Bachelor of Science in Computer Science'),('BSCmpE','Bachelor of Science in Computer Engineering'), ('BSChE', 'Bachelor of Science in Chemical Engineering')," +
+                                "('BSCE', 'Bachelor of Science in Civil Engineering'), ('BSEE', 'Bachelor of Science in Electrical Engineering'), ('BSME', 'Bachelor of Science in Mechanical Engineering'), ('BSIE', 'Bachelor of Science in Industrial Engineering')," +
+                                "('BSBmE', 'Bachelor of Science in Biomedical Engineering'), ('BSBE', 'Bachelor of Science in Biological and Agricultural Engineering'), ('BSDTSC', 'Bachelor of Science in Data Science');");
 
-        jdbcTemplate.execute("CREATE TABLE students(student_id INT NOT NULL, student_name VARCHAR(55), major VARCHAR(6), PRIMARY KEY (student_id));");
-        jdbcTemplate.execute("INSERT INTO students(student_id, student_name, major) VALUES (010931631, 'Hayden Prater','BSCE'), (010852905, 'Bailey Grimes', 'BSCE');");
+        jdbcTemplate.execute("CREATE TABLE students(student_id INT NOT NULL, student_name VARCHAR(55), major_id INT, PRIMARY KEY (student_id), FOREIGN KEY (major_id) REFERENCES major(major_id));");
+        jdbcTemplate.execute("INSERT INTO students(student_id, student_name, major_id) VALUES (010931631, 'Hayden Prater', 3), (010852905, 'Bailey Grimes', 3);");
 
         jdbcTemplate.execute("CREATE TABLE jobs(job_id INT NOT NULL AUTO_INCREMENT, company_name VARCHAR(55), job_title VARCHAR(55), salary INT DEFAULT 0, PRIMARY KEY (job_id));");
         jdbcTemplate.execute("INSERT INTO jobs(company_name, job_title, salary) VALUES ('Walmart','Software Engineer I', 70000), ('JB Hunt', 'Software Engineer I', 60000);");
