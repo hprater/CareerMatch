@@ -1,10 +1,6 @@
 package edu.uark.csce.databasehb.web;
 
-import edu.uark.csce.databasehb.data.JobRepository;
-import edu.uark.csce.databasehb.data.Major;
-import edu.uark.csce.databasehb.data.MajorRepository;
-import edu.uark.csce.databasehb.data.Student;
-import edu.uark.csce.databasehb.data.StudentRepository;
+import edu.uark.csce.databasehb.data.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,11 +15,13 @@ public class WebController {
     private final StudentRepository studentRepo;
     private final JobRepository jobRepo;
     private final MajorRepository majorRepository;
+    private final ApplicationRepository applicationRepo;
 
-    public WebController(StudentRepository studentRepo, JobRepository jobRepo, MajorRepository majorRepository) {
+    public WebController(StudentRepository studentRepo, JobRepository jobRepo, MajorRepository majorRepository, ApplicationRepository applicationRepo) {
         this.studentRepo = studentRepo;
         this.jobRepo = jobRepo;
         this.majorRepository = majorRepository;
+        this.applicationRepo = applicationRepo;
     }
 
     @GetMapping("/addStudent")
@@ -39,7 +37,7 @@ public class WebController {
         if (form.isValid()) {
             try {
                 studentRepo.addStudent(form);
-                toast.setMessage(form.getStudentName() + " has been added to the database.");
+                toast.setMessage(form.getStudentName() + " has been added to the database");
             } catch (Exception e) {
                 toast.setCssClass("alert alert-danger");
                 toast.setMessage(e.getMessage());
@@ -62,6 +60,29 @@ public class WebController {
 
     @GetMapping("/addApplication")
     public String addApplication(Model model) {
+        return "add_application";
+    }
+
+    @PostMapping("/addApplication")
+    public String addApplication(@ModelAttribute ApplicationForm form, Model model) {
+        ToastMessage toast = new ToastMessage();
+        if (form.isValid()) {
+            try {
+                boolean duplicateValue = applicationRepo.addApplication(form);
+                if (duplicateValue) {
+                    toast.setMessage("Application already exists in the database");
+                    toast.setCssClass("alert alert-warning");
+                } else
+                    toast.setMessage("Application has been added to the database");
+            } catch (Exception e) {
+                toast.setCssClass("alert alert-danger");
+                toast.setMessage(e.getMessage());
+            }
+        } else {
+            toast.setCssClass("alert alert-warning");
+            toast.setMessage("Invalid Value(s) in form");
+        }
+        model.addAttribute("toast", toast);
         return "add_application";
     }
 
