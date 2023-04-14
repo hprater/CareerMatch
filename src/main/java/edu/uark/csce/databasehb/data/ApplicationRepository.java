@@ -21,7 +21,7 @@ public class ApplicationRepository {
     }
 
     public Application getApplicationByStudentIdJobId(ApplicationForm form) {
-        List<Application> applications = new ArrayList<>(template.query("SELECT application_id FROM applications WHERE student_id = ? AND job_id = ?",
+        List<Application> applications = new ArrayList<>(template.query("SELECT * FROM applications WHERE student_id = ? AND job_id = ?",
                 (rs, rowNum) -> new Application(rs.getInt("application_id"), rs.getLong("student_id"),
                         rs.getInt("job_id")), form.getStudentId(), form.getJobId()));
         return applications.isEmpty() ? null : applications.get(0);
