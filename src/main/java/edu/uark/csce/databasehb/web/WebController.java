@@ -27,7 +27,29 @@ public class WebController {
     }
 
     @GetMapping("/addStudent")
-    public String addStudent(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
+    public String addStudent(@RequestParam(name = "name", required = false, defaultValue = "World") String name, Model model) {
+        List<Major> majors = majorRepository.getAllMajors();
+        model.addAttribute("majors", majors);
+        return "add_student";
+    }
+
+    @PostMapping("/addStudent")
+    public String addStudent(@ModelAttribute StudentForm form, Model model) {
+        ToastMessage toast = new ToastMessage();
+        if (form.isValid()) {
+            try {
+                studentRepo.addStudent(form);
+                toast.setMessage(form.getStudentName() + " has been added to the database.");
+            } catch (Exception e) {
+                toast.setCssClass("alert alert-danger");
+                toast.setMessage(e.getMessage());
+            }
+        } else {
+            toast.setCssClass("alert alert-warning");
+            toast.setMessage("Invalid Value(s) in form");
+        }
+        log.info("Toast: {}", toast);
+        model.addAttribute("toast", toast);
         List<Major> majors = majorRepository.getAllMajors();
         model.addAttribute("majors", majors);
         return "add_student";
@@ -47,7 +69,9 @@ public class WebController {
     public String viewStudent(Model model) {
         log.info("ViewStudents GET");
         List<Major> majors = majorRepository.getAllMajors();
+        Boolean initialLoad = true;
         model.addAttribute("majors", majors);
+        model.addAttribute("initialLoad", initialLoad);
         return "view_students";
     }
 
@@ -59,7 +83,9 @@ public class WebController {
         log.info("MajorList: {}", majors);
         model.addAttribute("majors", majors);
         List<Student> studentList = studentRepo.getStudentsByMajor(major);
+        Boolean initialLoad = false;
         model.addAttribute("students", studentList);
+        model.addAttribute("initialLoad", initialLoad);
         return "view_students";
     }
 
@@ -80,25 +106,4 @@ public class WebController {
         return "index";
     }
 
-    @PostMapping("/addStudent")
-    public String addStudent(@ModelAttribute StudentForm form, Model model) {
-        ToastMessage toast = new ToastMessage();
-        if(form.isValid()){
-            try{
-                studentRepo.addStudent(form);
-                toast.setMessage(form.getStudentName() + " has been added to the database.");
-            } catch (Exception e) {
-                toast.setCssClass("alert alert-danger");
-                toast.setMessage(e.getMessage());
-            }
-        }else{
-            toast.setCssClass("alert alert-warning");
-            toast.setMessage("Invalid Value(s) in form");
-        }
-        log.info("Toast: {}", toast);
-        model.addAttribute("toast", toast);
-        List<Major> majors = majorRepository.getAllMajors();
-        model.addAttribute("majors", majors);
-        return "add_student";
-    }
 }
