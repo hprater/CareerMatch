@@ -25,11 +25,13 @@ public class StudentRepository {
         return students.isEmpty() ? null : students;
     }
 
-    public void addStudent(StudentForm form) {
+    public boolean addStudent(StudentForm form) {
         try {
             template.update("INSERT INTO students (student_id, student_name, major_id) VALUES (?, ?, ?)", form.getStudentId(), form.getStudentName(), form.getMajor());
+            return false;
         } catch (DataIntegrityViolationException dup) {
             template.update("UPDATE students SET student_name = ?, major_id = ? WHERE student_id = ?", form.getStudentName(), form.getMajor(), form.getStudentId());
+            return true;
         }
     }
 }

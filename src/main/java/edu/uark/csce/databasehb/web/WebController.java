@@ -36,8 +36,12 @@ public class WebController {
         ToastMessage toast = new ToastMessage();
         if (form.isValid()) {
             try {
-                studentRepo.addStudent(form);
-                toast.setMessage(form.getStudentName() + " has been added to the database");
+                boolean duplicateValue = studentRepo.addStudent(form);
+                if(duplicateValue){
+                    toast.setCssClass("alert alert-warning");
+                    toast.setMessage("Student already exists in the database, updating values instead");
+                }else
+                    toast.setMessage(form.getStudentName() + " has been added to the database");
             } catch (Exception e) {
                 toast.setCssClass("alert alert-danger");
                 toast.setMessage(e.getMessage());
