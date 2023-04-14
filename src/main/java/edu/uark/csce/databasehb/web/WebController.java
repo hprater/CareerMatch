@@ -65,9 +65,14 @@ public class WebController {
         ToastMessage toast = new ToastMessage();
         if (form.isValid()) {
             try {
-                jobRepo.addJob(form);
+                boolean duplicateValue = jobRepo.addJob(form);
+                if (duplicateValue) {
+                    toast.setCssClass("alert alert-warning");
+                    toast.setMessage("Job already exists in the database");
+                } else {
+                    toast.setMessage(form.getCompanyName() + " has been added to the database");
+                }
                 jobRepo.addJobToJobMajor(form);
-                toast.setMessage(form.getCompanyName() + " has been added to the database");
             } catch (Exception e) {
                 toast.setCssClass("alert alert-danger");
                 toast.setMessage(e.getMessage());
@@ -144,6 +149,7 @@ public class WebController {
         model.addAttribute("initialLoad", initialLoad);
         return "view_jobs";
     }
+
     @PostMapping("/viewJob")
     public String viewJob(@RequestParam("major") Integer major, Model model) {
         log.info("ViewJobs POST");
