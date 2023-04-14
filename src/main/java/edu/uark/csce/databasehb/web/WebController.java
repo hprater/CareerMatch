@@ -55,6 +55,31 @@ public class WebController {
 
     @GetMapping("/addJob")
     public String addJob(Model model) {
+        List<Major> majors = majorRepository.getAllMajors();
+        model.addAttribute("majors", majors);
+        return "add_job";
+    }
+
+    @PostMapping("/addJob")
+    public String addJob(@ModelAttribute JobForm form, Model model) {
+        ToastMessage toast = new ToastMessage();
+        if (form.isValid()) {
+            try {
+                jobRepo.addJob(form);
+                jobRepo.addJobToJobMajor(form);
+                toast.setMessage(form.getCompanyName() + " has been added to the database");
+            } catch (Exception e) {
+                toast.setCssClass("alert alert-danger");
+                toast.setMessage(e.getMessage());
+            }
+        } else {
+            toast.setCssClass("alert alert-warning");
+            toast.setMessage("Invalid Value(s) in form");
+        }
+        log.info("Toast: {}", toast);
+        model.addAttribute("toast", toast);
+        List<Major> majors = majorRepository.getAllMajors();
+        model.addAttribute("majors", majors);
         return "add_job";
     }
 
@@ -112,6 +137,24 @@ public class WebController {
 
     @GetMapping("/viewJob")
     public String viewJob(Model model) {
+        log.info("ViewJobs GET");
+        List<Major> majors = majorRepository.getAllMajors();
+        Boolean initialLoad = true;
+        model.addAttribute("majors", majors);
+        model.addAttribute("initialLoad", initialLoad);
+        return "view_jobs";
+    }
+    @PostMapping("/viewJob")
+    public String viewJob(@RequestParam("major") Integer major, Model model) {
+        log.info("ViewJobs POST");
+        List<Major> majors = majorRepository.getAllMajors();
+        majors.add(0, majors.stream().filter(s -> s.getMajorId() == major).toList().get(0));
+        log.info("MajorList: {}", majors);
+        model.addAttribute("majors", majors);
+        List<Job> jobList = jobRepo.getJobByMajor(major);
+        Boolean initialLoad = false;
+        model.addAttribute("jobs", jobList);
+        model.addAttribute("initialLoad", initialLoad);
         return "view_jobs";
     }
 

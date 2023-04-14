@@ -4,13 +4,12 @@ public class Job {
     private long id, salary;
     private String companyName;
     private String jobTitle;
-    private String desiredMajor;
-    public Job(long id, String companyName, String jobTitle, long salary, String desiredMajor) {
+
+    public Job(long id, String companyName, String jobTitle, long salary) {
         this.id = id;
         this.salary = salary;
         this.companyName = companyName;
         this.jobTitle = jobTitle;
-        this.desiredMajor = desiredMajor;
     }
     public long getId() {
         return id;
@@ -24,5 +23,5 @@ public class Job {
     public String getJobTitle() {
         return jobTitle;
     }
-    public String getDesiredMajor(){return desiredMajor;}
+
 }

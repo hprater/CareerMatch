@@ -7,17 +7,19 @@ import java.util.List;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class JobForm {
-    private int jobId;
+    private Integer jobId;
     private String companyName;
     private String jobTitle;
     private double salary;
-    private List<Integer> desiredMajors;
 
-    public int getJobId() {
+    //    private List<Integer> majors;
+    private Integer major;
+
+    public Integer getJobId() {
         return jobId;
     }
 
-    public void setJobId(int jobId) {
+    public void setJobId(Integer jobId) {
         this.jobId = jobId;
     }
 
@@ -45,17 +47,24 @@ public class JobForm {
         this.salary = salary;
     }
 
-    public List<Integer> getDesiredMajors() {
-        return desiredMajors;
+    //    public List<Integer> getMajors() {
+//        return majors;
+//    }
+//    public void setMajors(List<Integer> majors) {
+//        this.majors = majors;
+//    }
+    public Integer getMajor() {
+        return major;
     }
 
-    public void setDesiredMajors(List<Integer> desiredMajors) {
-        this.desiredMajors = desiredMajors;
+    public void setMajor(Integer major) {
+        this.major = major;
     }
+
 
     //create method check if inputs are valid.boolean
     public Boolean isValid() {
-        if(isBlank(companyName)) return false;
+        if (isBlank(companyName)) return false;
         return true;
     }
 }
