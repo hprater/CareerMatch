@@ -24,7 +24,6 @@ class JobFormTest {
         form.setCompanyName("Flintstone");
         form.setJobTitle("Engineer");
         form.setSalary(10);
-        form.setDesiredMajors(Collections.singletonList(1));
         assertTrue(form.isValid());
     }
 
@@ -34,7 +33,6 @@ class JobFormTest {
         form.setCompanyName("");
         form.setJobTitle("Engineer");
         form.setSalary(10);
-        form.setDesiredMajors(Collections.singletonList(1));
         assertFalse(form.isValid());
     }
 }
