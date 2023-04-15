@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<!-- View Applications HTML page>-->
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>DB Project: viewApplication</title>
@@ -42,6 +43,7 @@
     </style>
 </head>
 <body class="dbfp-black">
+
 <!-- Icon Bar (Sidebar - hidden on small screens) -->
 <nav class="dbfp-sidebar dbfp-bar-block dbfp-small dbfp-hide-small dbfp-center">
     <!-- Avatar image in top left corner -->
@@ -75,40 +77,93 @@
         <p>VIEW APPLICATION</p>
     </a>
 </nav>
+
+<!-- Top of Web Page Header >-->
 <div class="dbfp-padding-large" id="main2">
     <h2 style="font-family:Castellar; font-size: 40px"> View Applications </h2>
 
+    <!-- Dropdown to select search method>-->
     <form action="/viewApplication" method="post">
-        <div><select onchange="this.form.submit()" name="searchMethod" id="searchMethod" class="dbfp-input dbfp-padding-16">
-                <option disabled selected value>Search By</option>
-                <option value = "1">View All Applications</option>
-                <option value = "2">View All Applications by Major</option>
-                <option value = "3">View All Applications by Student ID</option>
-                <option value = "4">View All Applications by Specific Job</option>
+        <div><select onchange="this.form.submit()" name="searchMethod" id="searchMethod"
+                     class="dbfp-input dbfp-padding-16">
+            <option disabled selected value>Search By</option>
+            <option value="1">View All Applications</option>
+            <option value="2">View All Applications by Major</option>
+            <option value="3">View All Applications by Student ID</option>
+            <option value="4">View All Applications by Specific Job</option>
         </select></div>
     </form>
     <br>
-    <form th:if="${majorList}" action="/viewApplication2" method="post">
-        <div><select onchange="this.form.submit()" name="major" id="major" class="dbfp-input dbfp-padding-16">
-            <optgroup label="Majors">
-                <option disabled selected value>Select Major</option>
-                <option th:each="major : ${majorList}" th:value="${major.getMajorId()}"
-                        th:text="${major.getMajorDescription()} + ' (' + ${major.getMajor()} + ')'">Choose
-                </option>
-            </optgroup>
-        </select></div>
-    </form>
-    <form th:if="${studentList}" action="/viewApplication2" method="post">
-        <div><select onchange="this.form.submit()" name="studentId" id="studentId" class="dbfp-input dbfp-padding-16">
-            <optgroup label="Students">
-                <option disabled selected value>Select Student</option>
-                <option th:each="student : ${studentList}" th:value="${student.getId()}"
-                        th:text="${student.getId()} + ' (' + ${student.getStudentName()} + ')'">Choose
-                </option>
-            </optgroup>
-        </select></div>
-    </form>
-    <form th:if="${jobList}" action="/viewApplication2" method="post">
+
+    <!-- View Applications by Major Dropdown / Output Table>-->
+    <div th:if="${majorList}">
+        <form action="/viewApplication2" method="post">
+            <div><select onchange="this.form.submit()" name="major" id="major" class="dbfp-input dbfp-padding-16">
+                <optgroup label="Majors">
+                    <option disabled selected value>Select Major</option>
+                    <option th:each="major : ${majorList}" th:value="${major.getMajorId()}"
+                            th:text="${major.getMajorDescription()} + ' (' + ${major.getMajor()} + ')'">Choose
+                    </option>
+                </optgroup>
+            </select></div>
+        </form>
+        <div th:if="${noList}">
+            <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
+        </div>
+        <!-- Start of table >-->
+        <table class="dbfp-content-table" th:unless="${noList}">
+            <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Student Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="student : ${students}">
+                <td th:text="${student.getId()}"></td>
+                <td th:text="${student.getStudentName()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- View Applications by Student Dropdown / Output Table>-->
+    <div th:if="${studentList}">
+        <form action="/viewApplication2" method="post">
+            <div><select onchange="this.form.submit()" name="studentId" id="studentId"
+                         class="dbfp-input dbfp-padding-16">
+                <optgroup label="Students">
+                    <option disabled selected value>Select Student</option>
+                    <option th:each="student : ${studentList}" th:value="${student.getId()}"
+                            th:text="${student.getId()} + ' (' + ${student.getStudentName()} + ')'">Choose
+                    </option>
+                </optgroup>
+            </select></div>
+        </form>
+        <div th:if="${noList}">
+            <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
+        </div>
+        <!-- Start of table >-->
+        <table class="dbfp-content-table" th:unless="${noList}">
+            <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Student Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="student : ${students}">
+                <td th:text="${student.getId()}"></td>
+                <td th:text="${student.getStudentName()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- View Applications by Jobs Dropdown / Output Table>-->
+    <div th:if="${jobList}">
+    <form  action="/viewApplication2" method="post">
         <div><select onchange="this.form.submit()" name="jobId" id="jobId" class="dbfp-input dbfp-padding-16">
             <optgroup label="Jobs">
                 <option disabled selected value>Select Job</option>
@@ -118,23 +173,25 @@
             </optgroup>
         </select></div>
     </form>
-    <div th:if="${noList}">
-        <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
+        <div th:if="${noList}">
+            <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
+        </div>
+        <!-- Start of table >-->
+        <table class="dbfp-content-table" th:unless="${noList}">
+            <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Student Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="student : ${students}">
+                <td th:text="${student.getId()}"></td>
+                <td th:text="${student.getStudentName()}"></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-<!--    <table class="dbfp-content-table" th:unless="${noList}">-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--            <th>Student ID</th>-->
-<!--            <th>Student Name</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--        <tr th:each="student : ${students}">-->
-<!--            <td th:text="${student.getId()}"></td>-->
-<!--            <td th:text="${student.getStudentName()}"></td>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--    </table>-->
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
