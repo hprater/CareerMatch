@@ -18,6 +18,11 @@ public class JobRepository {
         this.template = template;
     }
 
+    public List<Job> getAllJobs() {
+        List<Job> jobs = new ArrayList<>(template.query("SELECT * FROM jobs",
+                (rs, rowNum) -> new Job(rs.getLong("job_id"), rs.getString("company_name"), rs.getString("job_title"), rs.getLong("salary"))));
+        return jobs.isEmpty() ? null : jobs;
+    }
 
     public List<Job> getJobByMajor(int major) {
         List<Job> jobs = new ArrayList<>(template.query(

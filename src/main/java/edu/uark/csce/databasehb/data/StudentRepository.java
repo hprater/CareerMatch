@@ -18,6 +18,12 @@ public class StudentRepository {
         this.template = template;
     }
 
+    public List<Student> getAllStudents() {
+        List<Student> students = new ArrayList<>(template.query("SELECT * FROM students",
+                (rs, rowNum) -> new Student(rs.getLong("student_id"), rs.getString("student_name"), rs.getString("major_id"))));
+        return students.isEmpty() ? null : students;
+    }
+
     public List<Student> getStudentsByMajor(int major) {
         List<Student> students = new ArrayList<>(template.query(
                         "SELECT student_id, student_name, major FROM students s, majors m WHERE s.major_id = m.major_id AND m.major_id = ?;",

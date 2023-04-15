@@ -173,6 +173,27 @@ public class WebController {
         return "view_applications";
     }
 
+    @PostMapping("/viewApplication")
+    public String viewApplication(@RequestParam("searchMethod") Integer searchMethod, Model model){
+        switch (searchMethod) {
+            case 2 -> {
+                List<Major> majors = majorRepository.getAllMajors();
+                model.addAttribute("chosenList", majors);
+            }
+            case 3 -> {
+                List<Student> students = studentRepo.getAllStudents();
+                model.addAttribute("chosenList", students);
+            }
+            case 4 -> {
+                List<Job> jobs = jobRepo.getAllJobs();
+                model.addAttribute("chosenList", jobs);
+            }
+            default -> model.addAttribute("chosenList", null);
+        }
+
+        return "view_applications";
+    }
+
     @GetMapping("/")
     public String defaultPath(Model model) {
 //        String name = repo.getStudents().getmajor();
