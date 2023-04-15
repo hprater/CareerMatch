@@ -22,7 +22,7 @@ public class ApplicationRepository {
     }
 
     public List<ViewApplicationForm> getAllApplications() {
-        List<ViewApplicationForm> applications = new ArrayList<>(template.query("SELECT s.student_name, j.company_name, j.salary, m.major_desc" +
+        List<ViewApplicationForm> applications = new ArrayList<>(template.query("SELECT s.student_name, j.company_name, j.salary, m.major_desc " +
                         "FROM applications a, students s, jobs j, majors m, job_majors jm " +
                         "WHERE a.student_id = s.student_id AND s.major_id = m.major_id AND a.job_id = j.job_id AND j.job_id = jm.job_id AND jm.major_id = m.major_id",
                 (rs, rowNum) -> new ViewApplicationForm(rs.getString("student_name"), rs.getString("company_name"),
@@ -31,7 +31,7 @@ public class ApplicationRepository {
     }
 
     public List<ViewApplicationForm> getApplicationByMajorId(int majorId) {
-        List<ViewApplicationForm> applications = new ArrayList<>(template.query("SELECT s.student_name, j.company_name, j.salary, m.major_desc" +
+        List<ViewApplicationForm> applications = new ArrayList<>(template.query("SELECT s.student_name, j.company_name, j.salary, m.major_desc " +
                         "FROM applications a, students s, jobs j, majors m, job_majors jm " +
                         "WHERE a.student_id = s.student_id AND s.major_id = m.major_id AND a.job_id = j.job_id AND j.job_id = jm.job_id AND jm.major_id = m.major_id AND m.major_id = ?",
                 (rs, rowNum) -> new ViewApplicationForm(rs.getString("student_name"), rs.getString("company_name"),
@@ -40,7 +40,7 @@ public class ApplicationRepository {
     }
 
     public List<ViewApplicationForm> getApplicationByStudentId(long studentId) {
-        List<ViewApplicationForm> applications = new ArrayList<>(template.query("SELECT s.student_name, j.company_name, j.salary, m.major_desc" +
+        List<ViewApplicationForm> applications = new ArrayList<>(template.query("SELECT s.student_name, j.company_name, j.salary, m.major_desc " +
                         "FROM applications a, students s, jobs j, majors m, job_majors jm " +
                         "WHERE a.student_id = s.student_id AND s.major_id = m.major_id AND a.job_id = j.job_id AND j.job_id = jm.job_id AND jm.major_id = m.major_id AND s.student_id = ?",
                 (rs, rowNum) -> new ViewApplicationForm(rs.getString("student_name"), rs.getString("company_name"),
@@ -49,7 +49,7 @@ public class ApplicationRepository {
     }
 
     public List<ViewApplicationForm> getApplicationByJobId(long jobId) {
-        List<ViewApplicationForm> applications = new ArrayList<>(template.query("SELECT s.student_name, j.company_name, j.salary, m.major_desc" +
+        List<ViewApplicationForm> applications = new ArrayList<>(template.query("SELECT s.student_name, j.company_name, j.salary, m.major_desc " +
                         "FROM applications a, students s, jobs j, majors m, job_majors jm " +
                         "WHERE a.student_id = s.student_id AND s.major_id = m.major_id AND a.job_id = j.job_id AND j.job_id = jm.job_id AND jm.major_id = m.major_id AND j.job_id = ?",
                 (rs, rowNum) -> new ViewApplicationForm(rs.getString("student_name"), rs.getString("company_name"),
