@@ -79,12 +79,39 @@
     <h2 style="font-family:Castellar; font-size: 40px"> View Applications </h2>
 
     <form action="/viewApplication" method="post">
-        <div><select onchange="this.form.submit()" name="search" id="search" class="dbfp-input dbfp-padding-16">
+        <div><select onchange="this.form.submit()" name="searchMethod" id="searchMethod" class="dbfp-input dbfp-padding-16">
                 <option disabled selected value>Search By</option>
                 <option value = "1">View All Applications</option>
                 <option value = "2">View All Applications by Major</option>
                 <option value = "3">View All Applications by Student ID</option>
                 <option value = "4">View All Applications by Specific Job</option>
+        </select></div>
+    </form>
+    <form th:if="${chosenList}" action="/viewApplication" method="post">
+        <div><select onchange="this.form.submit()" name="major" id="major" class="dbfp-input dbfp-padding-16">
+            <optgroup label="Majors">
+                <option th:each="major : ${majors}" th:value="${major.majorId}"
+                        th:text="${major.majorDescription} + ' (' + ${major.getMajor()} + ')'">Choose
+                </option>
+            </optgroup>
+        </select></div>
+    </form>
+    <form th:if="${chosenList}" action="/viewApplication" method="post">
+        <div><select onchange="this.form.submit()" name="studentId" id="studentId" class="dbfp-input dbfp-padding-16">
+            <optgroup label="Students">
+                <option th:each="student : ${students}" th:value="${student.getStudentId()}"
+                        th:text="${student.getStudentId()} + ' (' + ${student.getStudentName()} + ')'">Choose
+                </option>
+            </optgroup>
+        </select></div>
+    </form>
+    <form th:if="${chosenList}" action="/viewApplication" method="post">
+        <div><select onchange="this.form.submit()" name="jobId" id="jobId" class="dbfp-input dbfp-padding-16">
+            <optgroup label="Jobs">
+                <option th:each="job : ${jobs}" th:value="${job.getJobId()}"
+                        th:text="${job.getJobTitle} + ' (' + ${job.getCompanyName} + ')'">Choose
+                </option>
+            </optgroup>
         </select></div>
     </form>
     <div th:if="${#lists.isEmpty(students)}">
