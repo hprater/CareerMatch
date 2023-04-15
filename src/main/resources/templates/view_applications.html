@@ -95,6 +95,38 @@
     </form>
     <br>
 
+    <!-- View ALL Applications Output Table>-->
+    <div th:if="${allApplications}">
+        <form action="/viewApplication2" method="post">
+            <div><select onchange="this.form.submit()" name="major" id="major" class="dbfp-input dbfp-padding-16">
+                <optgroup label="Majors">
+                    <option disabled selected value>Select Major</option>
+                    <option th:each="major : ${majorList}" th:value="${major.getMajorId()}"
+                            th:text="${major.getMajorDescription()} + ' (' + ${major.getMajor()} + ')'">Choose
+                    </option>
+                </optgroup>
+            </select></div>
+        </form>
+        <div th:if="${noList}">
+            <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
+        </div>
+        <!-- Start of table >-->
+        <table class="dbfp-content-table" th:unless="${noList}">
+            <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Student Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="student : ${students}">
+                <td th:text="${student.getId()}"></td>
+                <td th:text="${student.getStudentName()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
     <!-- View Applications by Major Dropdown / Output Table>-->
     <div th:if="${majorList}">
         <form action="/viewApplication2" method="post">
@@ -126,7 +158,6 @@
             </tbody>
         </table>
     </div>
-
 
     <!-- View Applications by Student Dropdown / Output Table>-->
     <div th:if="${studentList}">
