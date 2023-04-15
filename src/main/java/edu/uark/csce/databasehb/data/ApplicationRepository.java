@@ -1,6 +1,7 @@
 package edu.uark.csce.databasehb.data;
 
 import edu.uark.csce.databasehb.web.ApplicationForm;
+import edu.uark.csce.databasehb.web.ViewApplicationForm;
 import org.springframework.dao.DataIntegrityViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
@@ -20,39 +21,39 @@ public class ApplicationRepository {
         this.template = template;
     }
 
-    public List<Application> getAllApplications() {
-        List<Application> applications = new ArrayList<>(template.query("SELECT s.student_name, j.company_name, j.salary, m.major_desc\n" +
-                        "FROM applications a, students s, jobs j, majors m, job_majors jm\n" +
+    public List<ViewApplicationForm> getAllApplications() {
+        List<ViewApplicationForm> applications = new ArrayList<>(template.query("SELECT s.student_name, j.company_name, j.salary, m.major_desc" +
+                        "FROM applications a, students s, jobs j, majors m, job_majors jm" +
                         "WHERE a.student_id = s.student_id AND s.major_id = m.major_id AND a.job_id = j.job_id AND j.job_id = jm.job_id AND jm.major_id = m.major_id",
-                (rs, rowNum) -> new Application(rs.getInt("application_id"), rs.getLong("student_id"),
-                        rs.getInt("job_id"))));
+                (rs, rowNum) -> new ViewApplicationForm(rs.getString("student_name"), rs.getString("company_name"),
+                        rs.getLong("salary"), rs.getString("major_desc"))));
         return applications.isEmpty() ? null : applications;
     }
 
-    public List<Application> getApplicationByMajorId(int majorId) {
-        List<Application> applications = new ArrayList<>(template.query("SELECT s.student_name, j.company_name, j.salary, m.major_desc\n" +
-                        "FROM applications a, students s, jobs j, majors m, job_majors jm\n" +
+    public List<ViewApplicationForm> getApplicationByMajorId(int majorId) {
+        List<ViewApplicationForm> applications = new ArrayList<>(template.query("SELECT s.student_name, j.company_name, j.salary, m.major_desc" +
+                        "FROM applications a, students s, jobs j, majors m, job_majors jm" +
                         "WHERE a.student_id = s.student_id AND s.major_id = m.major_id AND a.job_id = j.job_id AND j.job_id = jm.job_id AND jm.major_id = m.major_id AND m.major_id = ?",
-                (rs, rowNum) -> new Application(rs.getInt("application_id"), rs.getLong("student_id"),
-                        rs.getInt("job_id")), majorId));
+                (rs, rowNum) -> new ViewApplicationForm(rs.getString("student_name"), rs.getString("company_name"),
+                        rs.getLong("salary"), rs.getString("major_desc"))));
         return applications.isEmpty() ? null : applications;
     }
 
-    public List<Application> getApplicationByStudentId(long studentId) {
-        List<Application> applications = new ArrayList<>(template.query("SELECT s.student_name, j.company_name, j.salary, m.major_desc\n" +
-                        "FROM applications a, students s, jobs j, majors m, job_majors jm\n" +
+    public List<ViewApplicationForm> getApplicationByStudentId(long studentId) {
+        List<ViewApplicationForm> applications = new ArrayList<>(template.query("SELECT s.student_name, j.company_name, j.salary, m.major_desc" +
+                        "FROM applications a, students s, jobs j, majors m, job_majors jm" +
                         "WHERE a.student_id = s.student_id AND s.major_id = m.major_id AND a.job_id = j.job_id AND j.job_id = jm.job_id AND jm.major_id = m.major_id AND s.student_id = ?",
-                (rs, rowNum) -> new Application(rs.getInt("application_id"), rs.getLong("student_id"),
-                        rs.getInt("job_id")), studentId));
+                (rs, rowNum) -> new ViewApplicationForm(rs.getString("student_name"), rs.getString("company_name"),
+                        rs.getLong("salary"), rs.getString("major_desc"))));
         return applications.isEmpty() ? null : applications;
     }
 
-    public List<Application> getApplicationByJobId(int jobId) {
-        List<Application> applications = new ArrayList<>(template.query("SELECT s.student_name, j.company_name, j.salary, m.major_desc\n" +
-                        "FROM applications a, students s, jobs j, majors m, job_majors jm\n" +
+    public List<ViewApplicationForm> getApplicationByJobId(long jobId) {
+        List<ViewApplicationForm> applications = new ArrayList<>(template.query("SELECT s.student_name, j.company_name, j.salary, m.major_desc" +
+                        "FROM applications a, students s, jobs j, majors m, job_majors jm" +
                         "WHERE a.student_id = s.student_id AND s.major_id = m.major_id AND a.job_id = j.job_id AND j.job_id = jm.job_id AND jm.major_id = m.major_id AND j.job_id = ?",
-                (rs, rowNum) -> new Application(rs.getInt("application_id"), rs.getLong("student_id"),
-                        rs.getInt("job_id")), jobId));
+                (rs, rowNum) -> new ViewApplicationForm(rs.getString("student_name"), rs.getString("company_name"),
+                        rs.getLong("salary"), rs.getString("major_desc"))));
         return applications.isEmpty() ? null : applications;
     }
 

@@ -178,17 +178,22 @@ public class WebController {
     public String viewApplication(@RequestParam("searchMethod") Integer searchMethod, Model model) {
         boolean noList = false;
         switch (searchMethod) {
-            case 2 -> {
+            case 1 -> { // View all applications
+                List<ViewApplicationForm> applications = applicationRepo.getAllApplications();
+                model.addAttribute("allApplications", applications);
+                model.addAttribute("noList", noList);
+            }
+            case 2 -> { // View all applications by specified majorId
                 List<Major> majors = majorRepository.getAllMajors();
                 model.addAttribute("majorList", majors);
                 model.addAttribute("noList", noList);
             }
-            case 3 -> {
+            case 3 -> { // View all applications by specified studentId
                 List<Student> students = studentRepo.getAllStudents();
                 model.addAttribute("studentList", students);
                 model.addAttribute("noList", noList);
             }
-            case 4 -> {
+            case 4 -> { // View all applications by specified jobId
                 List<Job> jobs = jobRepo.getAllJobs();
                 model.addAttribute("jobList", jobs);
                 model.addAttribute("noList", noList);
@@ -210,16 +215,22 @@ public class WebController {
                 List<Major> majors = majorRepository.getAllMajors();
                 model.addAttribute("majorList", majors);
                 model.addAttribute("noList", noList);
+                List<ViewApplicationForm> applications = applicationRepo.getApplicationByMajorId(major);
+                model.addAttribute("majorResults", applications);
             }
             case 3 -> {
                 List<Student> students = studentRepo.getAllStudents();
                 model.addAttribute("studentList", students);
                 model.addAttribute("noList", noList);
+                List<ViewApplicationForm> applications = applicationRepo.getApplicationByStudentId(studentId);
+                model.addAttribute("studentResults", applications);
             }
             case 4 -> {
                 List<Job> jobs = jobRepo.getAllJobs();
                 model.addAttribute("jobList", jobs);
                 model.addAttribute("noList", noList);
+                List<ViewApplicationForm> applications = applicationRepo.getApplicationByJobId(jobId);
+                model.addAttribute("jobResults", applications);
             }
             default -> {
                 noList = true;
