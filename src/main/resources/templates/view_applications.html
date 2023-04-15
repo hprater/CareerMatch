@@ -77,25 +77,33 @@
 </nav>
 <div class="dbfp-padding-large" id="main2">
     <h2 style="font-family:Castellar; font-size: 40px"> View Applications </h2>
-    <p>How would you like to search?</p>
 
-    <form action="/viewApplication">
-        <input type="radio" id="all" name="applications" value="ALL">
-        <label for="all">View All Applications</label><br>
-        <input type="radio" id="major" name="applications" value="MAJOR">
-        <label for="major">View All Applications by Major</label><br>
-        <input type="radio" id="student" name="applications" value="STUDENT">
-        <label for="student">View All Applications by Student ID</label><br>
-        <input type="radio" id="job" name="applications" value="JOB">
-        <label for="job">View All Applications by Specific Job</label><br>
-        <p>
-            <button class="dbfp-button dbfp-light-grey dbfp-padding-large" type="submit">
-                <i class="fa fa-paper-plane"></i> SUBMIT
-            </button>
-        </p>
+    <form action="/viewApplication" method="post">
+        <div><select onchange="this.form.submit()" name="search" id="search" class="dbfp-input dbfp-padding-16">
+                <option disabled selected value>Search By</option>
+                <option value = "1">View All Applications</option>
+                <option value = "2">View All Applications by Major</option>
+                <option value = "3">View All Applications by Student ID</option>
+                <option value = "4">View All Applications by Specific Job</option>
+        </select></div>
     </form>
-    <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
-
+    <div th:if="${#lists.isEmpty(students)}">
+        <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
+    </div>
+    <table class="dbfp-content-table" th:unless="${#lists.isEmpty(students)}">
+        <thead>
+        <tr>
+            <th>Student ID</th>
+            <th>Student Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student : ${students}">
+            <td th:text="${student.getId()}"></td>
+            <td th:text="${student.getStudentName()}"></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
