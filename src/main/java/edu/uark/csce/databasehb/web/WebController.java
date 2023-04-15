@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -37,10 +38,10 @@ public class WebController {
         if (form.isValid()) {
             try {
                 boolean duplicateValue = studentRepo.addStudent(form);
-                if(duplicateValue){
+                if (duplicateValue) {
                     toast.setCssClass("alert alert-warning");
                     toast.setMessage("Student already exists in the database, updating values instead");
-                }else
+                } else
                     toast.setMessage(form.getStudentName() + " has been added to the database");
             } catch (Exception e) {
                 toast.setCssClass("alert alert-danger");
@@ -174,23 +175,57 @@ public class WebController {
     }
 
     @PostMapping("/viewApplication")
-    public String viewApplication(@RequestParam("searchMethod") Integer searchMethod, Model model){
+    public String viewApplication(@RequestParam("searchMethod") Integer searchMethod, Model model) {
+        boolean noList = false;
         switch (searchMethod) {
             case 2 -> {
                 List<Major> majors = majorRepository.getAllMajors();
-                model.addAttribute("chosenList", majors);
+                model.addAttribute("majorList", majors);
+                model.addAttribute("noList", noList);
             }
             case 3 -> {
                 List<Student> students = studentRepo.getAllStudents();
-                model.addAttribute("chosenList", students);
+                model.addAttribute("studentList", students);
+                model.addAttribute("noList", noList);
             }
             case 4 -> {
                 List<Job> jobs = jobRepo.getAllJobs();
-                model.addAttribute("chosenList", jobs);
+                model.addAttribute("jobList", jobs);
+                model.addAttribute("noList", noList);
             }
-            default -> model.addAttribute("chosenList", null);
+            default -> {
+                noList = true;
+                model.addAttribute("noList", noList);
+            }
         }
+        return "view_applications";
+    }
 
+    @PostMapping("/viewApplication2")
+    public String viewApplication(@RequestParam("searchMethod") Integer searchMethod, @RequestParam("major") int major,
+                                  @RequestParam("studentId") long studentId, @RequestParam("jobId") long jobId, Model model) {
+        boolean noList = false;
+        switch (searchMethod) {
+            case 2 -> {
+                List<Major> majors = majorRepository.getAllMajors();
+                model.addAttribute("majorList", majors);
+                model.addAttribute("noList", noList);
+            }
+            case 3 -> {
+                List<Student> students = studentRepo.getAllStudents();
+                model.addAttribute("studentList", students);
+                model.addAttribute("noList", noList);
+            }
+            case 4 -> {
+                List<Job> jobs = jobRepo.getAllJobs();
+                model.addAttribute("jobList", jobs);
+                model.addAttribute("noList", noList);
+            }
+            default -> {
+                noList = true;
+                model.addAttribute("noList", noList);
+            }
+        }
         return "view_applications";
     }
 
