@@ -174,53 +174,52 @@ public class WebController {
     public String viewApplication(Model model) {
         boolean noList = true;
         model.addAttribute("noList", noList);
+        model.addAttribute("searchMethod", 0);
         return "view_applications";
     }
 
     @PostMapping("/viewApplication")
     public String viewApplication(@RequestParam("searchMethod") Integer searchMethod, Model model) {
+        log.info("***** viewApplication *****");
         boolean noList = true;
-        Integer search = null;
+        model.addAttribute("searchMethod", searchMethod);
         switch (searchMethod) {
             case 1 -> { // View all applications
                 List<ViewApplicationForm> applications = applicationRepo.getAllApplications();
                 model.addAttribute("allApplications", applications);
                 noList = false;
                 model.addAttribute("noList", noList);
-                search = 1;
-                model.addAttribute("searchMethod", search);
             }
             case 2 -> { // View all applications by specified majorId
                 List<Major> majors = majorRepository.getAllMajors();
                 model.addAttribute("majorList", majors);
                 model.addAttribute("noList", noList);
-                search = 2;
-                model.addAttribute("searchMethod", search);
             }
             case 3 -> { // View all applications by specified studentId
                 List<Student> students = studentRepo.getAllStudents();
                 model.addAttribute("studentList", students);
                 model.addAttribute("noList", noList);
-                search = 3;
-                model.addAttribute("searchMethod", search);
             }
             case 4 -> { // View all applications by specified jobId
                 List<Job> jobs = jobRepo.getAllJobs();
                 model.addAttribute("jobList", jobs);
                 model.addAttribute("noList", noList);
-                search = 4;
-                model.addAttribute("searchMethod", search);
             }
             default -> {
                 model.addAttribute("noList", noList);
             }
         }
+        model.addAttribute("searchMethod", searchMethod);
         return "view_applications";
     }
 
     @PostMapping("/viewApplication2")
-    public String viewApplication(@RequestParam("searchMethod") Integer searchMethod, @RequestParam("major") int major,
-                                  @RequestParam("studentId") long studentId, @RequestParam("jobId") long jobId, Model model) {
+    public String viewApplication(@RequestParam(value = "searchMethod", required = false, defaultValue = "0") Integer searchMethod
+            , @RequestParam(value = "major", required = false, defaultValue = "0") int major
+            , @RequestParam(value = "studentId", required = false, defaultValue = "0") long studentId
+            , @RequestParam(value = "jobId", required = false, defaultValue = "0") long jobId, Model model) {
+        log.info("***** viewApplication2 *****");
+        model.addAttribute("searchMethod", searchMethod);
         boolean noList = false;
         switch (searchMethod) {
             case 2 -> {

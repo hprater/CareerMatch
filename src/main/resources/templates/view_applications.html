@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <!-- View Applications HTML page>-->
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <title>DB Project: viewApplication</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,225 +13,228 @@
           integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
     <style>
-        body, h1, h2, h3, h4, h5, h6 {
-            font-family: "Montserrat", sans-serif
-        }
+      body, h1, h2, h3, h4, h5, h6 {
+        font-family: "Montserrat", sans-serif
+      }
 
-        .dbfp-row-padding img {
-            margin-bottom: 12px
-        }
+      .dbfp-row-padding img {
+        margin-bottom: 12px
+      }
 
-        /* Set the width of the sidebar to 120px */
-        .dbfp-sidebar {
-            width: 140px;
-            background: #222;
-        }
+      /* Set the width of the sidebar to 120px */
+      .dbfp-sidebar {
+        width: 140px;
+        background: #222;
+      }
 
-        /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+      /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+      #main2 {
+        margin-right: 200px;
+        margin-left: 200px
+      }
+
+      /* Remove margins from "page content" on small screens */
+      @media only screen and (max-width: 600px) {
         #main2 {
-            margin-right: 200px;
-            margin-left: 200px
+          margin-right: 0;
+          margin-left: 0
         }
-
-        /* Remove margins from "page content" on small screens */
-        @media only screen and (max-width: 600px) {
-            #main2 {
-                margin-right: 0;
-                margin-left: 0
-            }
-        }
+      }
     </style>
-</head>
-<body class="dbfp-black">
+  </head>
+  <body class="dbfp-black">
 
-<!-- Icon Bar (Sidebar - hidden on small screens) -->
-<nav class="dbfp-sidebar dbfp-bar-block dbfp-small dbfp-hide-small dbfp-center">
-    <!-- Avatar image in top left corner -->
-    <img src="images/uofa.jpg" style="width:100%">
-    <a href="/" class="dbfp-bar-item dbfp-button dbfp-padding-large dbfp-hover-black">
+    <!-- Icon Bar (Sidebar - hidden on small screens) -->
+    <nav class="dbfp-sidebar dbfp-bar-block dbfp-small dbfp-hide-small dbfp-center">
+      <!-- Avatar image in top left corner -->
+      <img src="images/uofa.jpg" style="width:100%">
+      <a href="/" class="dbfp-bar-item dbfp-button dbfp-padding-large dbfp-hover-black">
         <i class="fa fa-home dbfp-xxlarge"></i>
         <p>HOME</p>
-    </a>
-    <a href="/addStudent" class="dbfp-bar-item dbfp-button dbfp-padding-large dbfp-hover-black">
+      </a>
+      <a href="/addStudent" class="dbfp-bar-item dbfp-button dbfp-padding-large dbfp-hover-black">
         <i class="fa fa-user dbfp-xxlarge"></i>
         <p>STUDENT</p>
-    </a>
-    <a href="/addJob" class="dbfp-bar-item dbfp-button dbfp-padding-large dbfp-hover-black">
+      </a>
+      <a href="/addJob" class="dbfp-bar-item dbfp-button dbfp-padding-large dbfp-hover-black">
         <i class="fa fa-suitcase dbfp-xxlarge"></i>
         <p>JOB</p>
-    </a>
-    <a href="/addApplication" class="dbfp-bar-item dbfp-button dbfp-padding-large dbfp-hover-black">
+      </a>
+      <a href="/addApplication" class="dbfp-bar-item dbfp-button dbfp-padding-large dbfp-hover-black">
         <i class="fa fa-edit dbfp-xxlarge"></i>
         <p>APPLICATION</p>
-    </a>
-    <a href="/viewStudent" class="dbfp-bar-item dbfp-button dbfp-padding-large dbfp-hover-black">
+      </a>
+      <a href="/viewStudent" class="dbfp-bar-item dbfp-button dbfp-padding-large dbfp-hover-black">
         <i class="fa fa-eye dbfp-xxlarge"></i>
         <p>VIEW STUDENTS</p>
-    </a>
-    <a href="/viewJob" class="dbfp-bar-item dbfp-button dbfp-padding-large dbfp-hover-black">
+      </a>
+      <a href="/viewJob" class="dbfp-bar-item dbfp-button dbfp-padding-large dbfp-hover-black">
         <i class="fa fa-eye dbfp-xxlarge"></i>
         <p>VIEW JOBS</p>
-    </a>
-    <a href="#" class="dbfp-bar-item dbfp-button dbfp-padding-large dbfp-black">
+      </a>
+      <a href="#" class="dbfp-bar-item dbfp-button dbfp-padding-large dbfp-black">
         <i class="fa fa-eye dbfp-xxlarge"></i>
         <p>VIEW APPLICATION</p>
-    </a>
-</nav>
+      </a>
+    </nav>
 
-<!-- Top of Web Page Header >-->
-<div class="dbfp-padding-large" id="main2">
-    <h2 style="font-family:Castellar; font-size: 40px"> View Applications </h2>
+    <!-- Top of Web Page Header >-->
+    <div class="dbfp-padding-large" id="main2">
+      <h2 style="font-family:Castellar; font-size: 40px"> View Applications </h2>
 
-    <!-- Dropdown to select search method>-->
-    <form action="/viewApplication" method="post">
-        <div><select onchange="this.form.submit()" name="searchMethod" id="searchMethod"
-                     class="dbfp-input dbfp-padding-16">
-            <option disabled selected value>Search By</option>
-            <option value="1">View All Applications</option>
-            <option value="2">View All Applications by Major</option>
-            <option value="3">View All Applications by Student ID</option>
-            <option value="4">View All Applications by Specific Job</option>
-        </select></div>
-    </form>
-    <br>
+      <!-- Dropdown to select search method>-->
+      <form action="/viewApplication" method="post">
+        <div>
+          <select onchange="this.form.submit()" name="searchMethod" id="searchMethod"
+                  class="dbfp-input dbfp-padding-16">
+            <option th:selected="${searchMethod==0}" value>Search By</option>
+            <option th:selected="${searchMethod==1}" value="1">View All Applications</option>
+            <option th:selected="${searchMethod==2}" value="2">View All Applications by Major</option>
+            <option th:selected="${searchMethod==3}" value="3">View All Applications by Student ID</option>
+            <option th:selected="${searchMethod==4}" value="4">View All Applications by Specific Job</option>
+          </select>
+        </div>
+      </form>
+      <br>
 
-    <!-- View ALL Applications Output Table>-->
-    <div th:if="${allApplications}">
+      <!-- View ALL Applications Output Table>-->
+      <div th:if="${allApplications}">
         <div th:if="${noList}">
-            <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
+          <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
         </div>
         <!-- Start of table >-->
         <table class="dbfp-content-table" th:unless="${noList}">
-            <thead>
+          <thead>
             <tr>
-                <th>Student Name</th>
-                <th>Company Name</th>
-                <th>Salary</th>
-                <th>Major</th>
+              <th>Student Name</th>
+              <th>Company Name</th>
+              <th>Salary</th>
+              <th>Major</th>
             </tr>
-            </thead>
-            <tbody>
+          </thead>
+          <tbody>
             <tr th:each="applicationElement : ${allApplications}">
-                <td th:text="${applicationElement.getStudentName()}"></td>
-                <td th:text="${applicationElement.getCompanyName()}"></td>
-                <td th:text="${'$' + applicationElement.getSalary()}"></td>
-                <td th:text="${applicationElement.getMajorDescription()}"></td>
+              <td th:text="${applicationElement.getStudentName()}"></td>
+              <td th:text="${applicationElement.getCompanyName()}"></td>
+              <td th:text="${'$' + applicationElement.getSalary()}"></td>
+              <td th:text="${applicationElement.getMajorDescription()}"></td>
             </tr>
-            </tbody>
+          </tbody>
         </table>
-    </div>
+      </div>
 
-    <!-- View Applications by Major Dropdown / Output Table>-->
-    <div th:if="${majorList}">
+      <!-- View Applications by Major Dropdown / Output Table>-->
+      <div th:if="${majorList}">
         <form action="/viewApplication2" method="post">
-            <div><select onchange="this.form.submit()" name="major" id="major" class="dbfp-input dbfp-padding-16">
-                <optgroup label="Majors">
-                    <option disabled selected value>Select Major</option>
-                    <option th:each="major : ${majorList}" th:value="${major.getMajorId()}"
-                            th:text="${major.getMajorDescription()} + ' (' + ${major.getMajor()} + ')'">Choose
-                    </option>
-                </optgroup>
-            </select></div>
+          <input type="hidden" th:value="${searchMethod}" name="searchMethod" />
+          <div><select onchange="this.form.submit()" name="major" id="major" class="dbfp-input dbfp-padding-16">
+            <optgroup label="Majors">
+              <option disabled selected value>Select Major</option>
+              <option th:each="major : ${majorList}" th:value="${major.getMajorId()}"
+                      th:text="${major.getMajorDescription()} + ' (' + ${major.getMajor()} + ')'">Choose
+              </option>
+            </optgroup>
+          </select></div>
         </form>
         <div th:if="${noList}">
-            <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
+          <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
         </div>
         <!-- Start of table >-->
         <table class="dbfp-content-table" th:unless="${noList}">
-            <thead>
+          <thead>
             <tr>
-                <th>Student Name</th>
-                <th>Company Name</th>
-                <th>Salary</th>
-                <th>Major</th>
+              <th>Student Name</th>
+              <th>Company Name</th>
+              <th>Salary</th>
+              <th>Major</th>
             </tr>
-            </thead>
-            <tbody>
+          </thead>
+          <tbody>
             <tr th:each="majorElement : ${majorResults}">
-                <td th:text="${majorElement.getStudentName()}"></td>
-                <td th:text="${majorElement.getCompanyName()}"></td>
-                <td th:text="${'$' + majorElement.getSalary()}"></td>
-                <td th:text="${majorElement.getMajorDescription()}"></td>
+              <td th:text="${majorElement.getStudentName()}"></td>
+              <td th:text="${majorElement.getCompanyName()}"></td>
+              <td th:text="${'$' + majorElement.getSalary()}"></td>
+              <td th:text="${majorElement.getMajorDescription()}"></td>
             </tr>
-            </tbody>
+          </tbody>
         </table>
-    </div>
+      </div>
 
-    <!-- View Applications by Student Dropdown / Output Table>-->
-    <div th:if="${studentList}">
+      <!-- View Applications by Student Dropdown / Output Table>-->
+      <div th:if="${studentList}">
         <form action="/viewApplication2" method="post">
-            <div><select onchange="this.form.submit()" name="studentId" id="studentId"
-                         class="dbfp-input dbfp-padding-16">
-                <optgroup label="Students">
-                    <option disabled selected value>Select Student</option>
-                    <option th:each="student : ${studentList}" th:value="${student.getId()}"
-                            th:text="${student.getId()} + ' (' + ${student.getStudentName()} + ')'">Choose
-                    </option>
-                </optgroup>
-            </select></div>
+          <div><select onchange="this.form.submit()" name="studentId" id="studentId"
+                       class="dbfp-input dbfp-padding-16">
+            <optgroup label="Students">
+              <option disabled selected value>Select Student</option>
+              <option th:each="student : ${studentList}" th:value="${student.getId()}"
+                      th:text="${student.getId()} + ' (' + ${student.getStudentName()} + ')'">Choose
+              </option>
+            </optgroup>
+          </select></div>
         </form>
         <div th:if="${noList}">
-            <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
+          <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
         </div>
         <!-- Start of table >-->
         <table class="dbfp-content-table" th:unless="${noList}">
-            <thead>
+          <thead>
             <tr>
-                <th>Student Name</th>
-                <th>Company Name</th>
-                <th>Salary</th>
-                <th>Major</th>
+              <th>Student Name</th>
+              <th>Company Name</th>
+              <th>Salary</th>
+              <th>Major</th>
             </tr>
-            </thead>
-            <tbody>
+          </thead>
+          <tbody>
             <tr th:each="studentElement : ${studentResults}">
-                <td th:text="${studentElement.getStudentName()}"></td>
-                <td th:text="${studentElement.getCompanyName()}"></td>
-                <td th:text="${'$' + studentElement.getSalary()}"></td>
-                <td th:text="${studentElement.getMajorDescription()}"></td>
+              <td th:text="${studentElement.getStudentName()}"></td>
+              <td th:text="${studentElement.getCompanyName()}"></td>
+              <td th:text="${'$' + studentElement.getSalary()}"></td>
+              <td th:text="${studentElement.getMajorDescription()}"></td>
             </tr>
-            </tbody>
+          </tbody>
         </table>
-    </div>
+      </div>
 
-    <!-- View Applications by Jobs Dropdown / Output Table>-->
-    <div th:if="${jobList}">
+      <!-- View Applications by Jobs Dropdown / Output Table>-->
+      <div th:if="${jobList}">
         <form action="/viewApplication2" method="post">
-            <div><select onchange="this.form.submit()" name="jobId" id="jobId" class="dbfp-input dbfp-padding-16">
-                <optgroup label="Jobs">
-                    <option disabled selected value>Select Job</option>
-                    <option th:each="job : ${jobList}" th:value="${job.getId()}"
-                            th:text="${job.getJobTitle()} + ' (' + ${job.getCompanyName()} + ')'">Choose
-                    </option>
-                </optgroup>
-            </select></div>
+          <div><select onchange="this.form.submit()" name="jobId" id="jobId" class="dbfp-input dbfp-padding-16">
+            <optgroup label="Jobs">
+              <option disabled selected value>Select Job</option>
+              <option th:each="job : ${jobList}" th:value="${job.getId()}"
+                      th:text="${job.getJobTitle()} + ' (' + ${job.getCompanyName()} + ')'">Choose
+              </option>
+            </optgroup>
+          </select></div>
         </form>
         <div th:if="${noList}">
-            <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
+          <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
         </div>
         <!-- Start of table >-->
         <table class="dbfp-content-table" th:unless="${noList}">
-            <thead>
+          <thead>
             <tr>
-                <th>Student Name</th>
-                <th>Company Name</th>
-                <th>Salary</th>
-                <th>Major</th>
+              <th>Student Name</th>
+              <th>Company Name</th>
+              <th>Salary</th>
+              <th>Major</th>
             </tr>
-            </thead>
-            <tbody>
+          </thead>
+          <tbody>
             <tr th:each="jobElement : ${jobResults}">
-                <td th:text="${jobElement.getStudentName()}"></td>
-                <td th:text="${jobElement.getCompanyName()}"></td>
-                <td th:text="${'$' + jobElement.getSalary()}"></td>
-                <td th:text="${jobElement.getMajorDescription()}"></td>
+              <td th:text="${jobElement.getStudentName()}"></td>
+              <td th:text="${jobElement.getCompanyName()}"></td>
+              <td th:text="${'$' + jobElement.getSalary()}"></td>
+              <td th:text="${jobElement.getMajorDescription()}"></td>
             </tr>
-            </tbody>
+          </tbody>
         </table>
+      </div>
     </div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-        crossorigin="anonymous"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+            crossorigin="anonymous"></script>
+  </body>
 </html>
