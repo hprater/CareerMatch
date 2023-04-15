@@ -111,11 +111,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="application : ${allApplications}">
-                <td th:text="${allApplications.getStudentName}"></td>
-                <td th:text="${allApplications.getCompanyName}"></td>
-                <td th:text="${'$' + allApplications.getSalary}"></td>
-                <td th:text="${allApplications.getMajorDescription}"></td>
+            <tr th:each="applicationElement : ${allApplications}">
+                <td th:text="${applicationElement.getStudentName()}"></td>
+                <td th:text="${applicationElement.getCompanyName()}"></td>
+                <td th:text="${'$' + applicationElement.getSalary()}"></td>
+                <td th:text="${applicationElement.getMajorDescription()}"></td>
             </tr>
             </tbody>
         </table>
@@ -147,11 +147,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="major : ${majorList}">
-                <td th:text="${majorList.getStudentName}"></td>
-                <td th:text="${majorList.getCompanyName}"></td>
-                <td th:text="${'$' + majorList.getSalary}"></td>
-                <td th:text="${majorList.getMajorDescription}"></td>
+            <tr th:each="majorElement : ${majorResults}">
+                <td th:text="${majorElement.getStudentName()}"></td>
+                <td th:text="${majorElement.getCompanyName()}"></td>
+                <td th:text="${'$' + majorElement.getSalary()}"></td>
+                <td th:text="${majorElement.getMajorDescription()}"></td>
             </tr>
             </tbody>
         </table>
@@ -184,11 +184,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="student : ${studentList}">
-                <td th:text="${studentList.getStudentName}"></td>
-                <td th:text="${studentList.getCompanyName}"></td>
-                <td th:text="${'$' + studentList.getSalary}"></td>
-                <td th:text="${studentList.getMajorDescription}"></td>
+            <tr th:each="studentElement : ${studentResults}">
+                <td th:text="${studentElement.getStudentName()}"></td>
+                <td th:text="${studentElement.getCompanyName()}"></td>
+                <td th:text="${'$' + studentElement.getSalary()}"></td>
+                <td th:text="${studentElement.getMajorDescription()}"></td>
             </tr>
             </tbody>
         </table>
@@ -220,11 +220,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="job : ${jobList}">
-                <td th:text="${jobList.getStudentName}"></td>
-                <td th:text="${jobList.getCompanyName}"></td>
-                <td th:text="${'$' + jobList.getSalary}"></td>
-                <td th:text="${jobList.getMajorDescription}"></td>
+            <tr th:each="jobElement : ${jobResults}">
+                <td th:text="${jobElement.getStudentName()}"></td>
+                <td th:text="${jobElement.getCompanyName()}"></td>
+                <td th:text="${'$' + jobElement.getSalary()}"></td>
+                <td th:text="${jobElement.getMajorDescription()}"></td>
             </tr>
             </tbody>
         </table>
