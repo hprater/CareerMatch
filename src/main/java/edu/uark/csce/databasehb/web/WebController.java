@@ -171,6 +171,8 @@ public class WebController {
 
     @GetMapping("/viewApplication")
     public String viewApplication(Model model) {
+        boolean noList = true;
+        model.addAttribute("noList", noList);
         return "view_applications";
     }
 
