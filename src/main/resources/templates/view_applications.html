@@ -97,16 +97,6 @@
 
     <!-- View ALL Applications Output Table>-->
     <div th:if="${allApplications}">
-        <form action="/viewApplication2" method="post">
-            <div><select onchange="this.form.submit()" name="major" id="major" class="dbfp-input dbfp-padding-16">
-                <optgroup label="Majors">
-                    <option disabled selected value>Select Major</option>
-                    <option th:each="major : ${majorList}" th:value="${major.getMajorId()}"
-                            th:text="${major.getMajorDescription()} + ' (' + ${major.getMajor()} + ')'">Choose
-                    </option>
-                </optgroup>
-            </select></div>
-        </form>
         <div th:if="${noList}">
             <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
         </div>
@@ -114,14 +104,18 @@
         <table class="dbfp-content-table" th:unless="${noList}">
             <thead>
             <tr>
-                <th>Student ID</th>
                 <th>Student Name</th>
+                <th>Company Name</th>
+                <th>Salary</th>
+                <th>Major</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="student : ${students}">
-                <td th:text="${student.getId()}"></td>
-                <td th:text="${student.getStudentName()}"></td>
+            <tr th:each="application : ${allApplications}">
+                <td th:text="${allApplications.getStudentName}"></td>
+                <td th:text="${allApplications.getCompanyName}"></td>
+                <td th:text="${'$' + allApplications.getSalary}"></td>
+                <td th:text="${allApplications.getMajorDescription}"></td>
             </tr>
             </tbody>
         </table>
@@ -146,14 +140,18 @@
         <table class="dbfp-content-table" th:unless="${noList}">
             <thead>
             <tr>
-                <th>Student ID</th>
                 <th>Student Name</th>
+                <th>Company Name</th>
+                <th>Salary</th>
+                <th>Major</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="student : ${students}">
-                <td th:text="${student.getId()}"></td>
-                <td th:text="${student.getStudentName()}"></td>
+            <tr th:each="major : ${majorList}">
+                <td th:text="${majorList.getStudentName}"></td>
+                <td th:text="${majorList.getCompanyName}"></td>
+                <td th:text="${'$' + majorList.getSalary}"></td>
+                <td th:text="${majorList.getMajorDescription}"></td>
             </tr>
             </tbody>
         </table>
@@ -179,14 +177,18 @@
         <table class="dbfp-content-table" th:unless="${noList}">
             <thead>
             <tr>
-                <th>Student ID</th>
                 <th>Student Name</th>
+                <th>Company Name</th>
+                <th>Salary</th>
+                <th>Major</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="student : ${students}">
-                <td th:text="${student.getId()}"></td>
-                <td th:text="${student.getStudentName()}"></td>
+            <tr th:each="student : ${studentList}">
+                <td th:text="${studentList.getStudentName}"></td>
+                <td th:text="${studentList.getCompanyName}"></td>
+                <td th:text="${'$' + studentList.getSalary}"></td>
+                <td th:text="${studentList.getMajorDescription}"></td>
             </tr>
             </tbody>
         </table>
@@ -194,16 +196,16 @@
 
     <!-- View Applications by Jobs Dropdown / Output Table>-->
     <div th:if="${jobList}">
-    <form  action="/viewApplication2" method="post">
-        <div><select onchange="this.form.submit()" name="jobId" id="jobId" class="dbfp-input dbfp-padding-16">
-            <optgroup label="Jobs">
-                <option disabled selected value>Select Job</option>
-                <option th:each="job : ${jobList}" th:value="${job.getId()}"
-                        th:text="${job.getJobTitle()} + ' (' + ${job.getCompanyName()} + ')'">Choose
-                </option>
-            </optgroup>
-        </select></div>
-    </form>
+        <form action="/viewApplication2" method="post">
+            <div><select onchange="this.form.submit()" name="jobId" id="jobId" class="dbfp-input dbfp-padding-16">
+                <optgroup label="Jobs">
+                    <option disabled selected value>Select Job</option>
+                    <option th:each="job : ${jobList}" th:value="${job.getId()}"
+                            th:text="${job.getJobTitle()} + ' (' + ${job.getCompanyName()} + ')'">Choose
+                    </option>
+                </optgroup>
+            </select></div>
+        </form>
         <div th:if="${noList}">
             <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
         </div>
@@ -211,14 +213,18 @@
         <table class="dbfp-content-table" th:unless="${noList}">
             <thead>
             <tr>
-                <th>Student ID</th>
                 <th>Student Name</th>
+                <th>Company Name</th>
+                <th>Salary</th>
+                <th>Major</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="student : ${students}">
-                <td th:text="${student.getId()}"></td>
-                <td th:text="${student.getStudentName()}"></td>
+            <tr th:each="job : ${jobList}">
+                <td th:text="${jobList.getStudentName}"></td>
+                <td th:text="${jobList.getCompanyName}"></td>
+                <td th:text="${'$' + jobList.getSalary}"></td>
+                <td th:text="${jobList.getMajorDescription}"></td>
             </tr>
             </tbody>
         </table>
