@@ -173,7 +173,9 @@ public class WebController {
     @GetMapping("/viewApplication")
     public String viewApplication(Model model) {
         boolean noList = true;
+        Boolean initialLoad = true;
         model.addAttribute("noList", noList);
+        model.addAttribute("initialLoad", initialLoad);
         model.addAttribute("searchMethod", 0);
         return "view_applications";
     }
@@ -182,6 +184,8 @@ public class WebController {
     public String viewApplication(@RequestParam("searchMethod") Integer searchMethod, Model model) {
         log.info("***** viewApplication *****");
         boolean noList = true;
+        Boolean initialLoad = false;
+        model.addAttribute("initialLoad", initialLoad);
         model.addAttribute("searchMethod", searchMethod);
         switch (searchMethod) {
             case 1 -> { // View all applications
@@ -221,6 +225,8 @@ public class WebController {
         log.info("***** viewApplication2 *****");
         model.addAttribute("searchMethod", searchMethod);
         boolean noList = false;
+        Boolean initialLoad = false;
+        model.addAttribute("initialLoad", initialLoad);
         switch (searchMethod) {
             case 2 -> {
                 List<Major> majors = majorRepository.getAllMajors();

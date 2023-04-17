@@ -96,6 +96,10 @@
         </div>
       </form>
       <br>
+      <!-- Picture Shown for initial load>-->
+      <div th:if="${noList and initialLoad}">
+        <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
+      </div>
 
       <!-- View ALL Applications Output Table>-->
       <div th:if="${allApplications}">
@@ -136,6 +140,7 @@
             </optgroup>
           </select></div>
         </form>
+        <br>
         <div th:if="${noList}">
           <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
         </div>
@@ -173,6 +178,7 @@
             </optgroup>
           </select></div>
         </form>
+        <br>
         <div th:if="${noList}">
           <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
         </div>
@@ -209,6 +215,7 @@
             </optgroup>
           </select></div>
         </form>
+        <br>
         <div th:if="${noList}">
           <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
         </div>
