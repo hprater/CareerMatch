@@ -128,12 +128,10 @@
         <form action="/viewApplication2" method="post">
           <input type="hidden" th:value="${searchMethod}" name="searchMethod" />
           <div><select onchange="this.form.submit()" name="major" id="major" class="dbfp-input dbfp-padding-16">
-            <optgroup label="Majors">
-              <option disabled selected value>Select Major</option>
+              <option disabled selected>Major...</option>
               <option th:each="major : ${majorList}" th:value="${major.getMajorId()}"
                       th:text="${major.getMajorDescription()} + ' (' + ${major.getMajor()} + ')'">Choose
               </option>
-            </optgroup>
           </select></div>
         </form>
         <div th:if="${noList}">

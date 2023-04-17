@@ -30,6 +30,7 @@ public class WebController {
     public String addStudent(@RequestParam(name = "name", required = false, defaultValue = "World") String name, Model model) {
         List<Major> majors = majorRepository.getAllMajors();
         model.addAttribute("majors", majors);
+        model.addAttribute("viewName", "add_student");
         return "add_student";
     }
 
@@ -56,6 +57,7 @@ public class WebController {
         model.addAttribute("toast", toast);
         List<Major> majors = majorRepository.getAllMajors();
         model.addAttribute("majors", majors);
+        model.addAttribute("viewName", "add_student");
         return "add_student";
     }
 
@@ -63,6 +65,7 @@ public class WebController {
     public String addJob(Model model) {
         List<Major> majors = majorRepository.getAllMajors();
         model.addAttribute("majors", majors);
+        model.addAttribute("viewName", "add_job");
         return "add_job";
     }
 
@@ -91,11 +94,13 @@ public class WebController {
         model.addAttribute("toast", toast);
         List<Major> majors = majorRepository.getAllMajors();
         model.addAttribute("majors", majors);
+        model.addAttribute("viewName", "add_job");
         return "add_job";
     }
 
     @GetMapping("/addApplication")
     public String addApplication(Model model) {
+        model.addAttribute("viewName", "add_application");
         return "add_application";
     }
 
@@ -119,6 +124,7 @@ public class WebController {
             toast.setMessage("Invalid Value(s) in form");
         }
         model.addAttribute("toast", toast);
+        model.addAttribute("viewName", "add_application");
         return "add_application";
     }
 
@@ -129,6 +135,7 @@ public class WebController {
         Boolean initialLoad = true;
         model.addAttribute("majors", majors);
         model.addAttribute("initialLoad", initialLoad);
+        model.addAttribute("viewName", "view_students");
         return "view_students";
     }
 
@@ -143,6 +150,7 @@ public class WebController {
         Boolean initialLoad = false;
         model.addAttribute("students", studentList);
         model.addAttribute("initialLoad", initialLoad);
+        model.addAttribute("viewName", "view_students");
         return "view_students";
     }
 
@@ -153,6 +161,7 @@ public class WebController {
         Boolean initialLoad = true;
         model.addAttribute("majors", majors);
         model.addAttribute("initialLoad", initialLoad);
+        model.addAttribute("viewName", "view_jobs");
         return "view_jobs";
     }
 
@@ -167,6 +176,7 @@ public class WebController {
         Boolean initialLoad = false;
         model.addAttribute("jobs", jobList);
         model.addAttribute("initialLoad", initialLoad);
+        model.addAttribute("viewName", "view_jobs");
         return "view_jobs";
     }
 
@@ -175,6 +185,7 @@ public class WebController {
         boolean noList = true;
         model.addAttribute("noList", noList);
         model.addAttribute("searchMethod", 0);
+        model.addAttribute("viewName", "view_applications");
         return "view_applications";
     }
 
@@ -210,6 +221,7 @@ public class WebController {
             }
         }
         model.addAttribute("searchMethod", searchMethod);
+        model.addAttribute("viewName", "view_applications");
         return "view_applications";
     }
 
@@ -248,13 +260,13 @@ public class WebController {
                 model.addAttribute("noList", noList);
             }
         }
+        model.addAttribute("viewName", "view_applications");
         return "view_applications";
     }
 
     @GetMapping("/")
     public String defaultPath(Model model) {
-//        String name = repo.getStudents().getmajor();
-//        model.addAttribute("name", name);
+        model.addAttribute("viewName", "home");
         return "index";
     }
 

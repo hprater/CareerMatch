@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <!-- Icon Bar (Sidebar - hidden on small screens) -->
+    <nav th:fragment="navigation" class="dbfp-sidebar dbfp-bar-block dbfp-small dbfp-hide-small dbfp-center">
+      <!-- Avatar image in top left corner -->
+      <img src="images/uofa.jpg" style="width:100%">
+      <a href="/" class="dbfp-bar-item dbfp-button dbfp-padding-large" th:classappend="${viewName == 'home'} ? dbfp-black : dbfp-hover-black">
+        <i class="fa fa-home dbfp-xxlarge"></i>
+        <p>HOME</p>
+      </a>
+      <a href="/addStudent" class="dbfp-bar-item dbfp-button dbfp-padding-large" th:classappend="${viewName == 'add_student'} ? dbfp-black : dbfp-hover-black">
+        <i class="fa fa-user dbfp-xxlarge"></i>
+        <p>STUDENT</p>
+      </a>
+      <a href="/addJob" class="dbfp-bar-item dbfp-button dbfp-padding-large" th:classappend="${viewName == 'add_job'} ? dbfp-black : dbfp-hover-black">
+        <i class="fa fa-suitcase dbfp-xxlarge"></i>
+        <p>JOB</p>
+      </a>
+      <a href="/addApplication" class="dbfp-bar-item dbfp-button dbfp-padding-large" th:classappend="${viewName == 'add_application'} ? dbfp-black : dbfp-hover-black">
+        <i class="fa fa-edit dbfp-xxlarge"></i>
+        <p>APPLICATION</p>
+      </a>
+      <a href="/viewStudent" class="dbfp-bar-item dbfp-button dbfp-padding-large" th:classappend="${viewName == 'view_students'} ? dbfp-black : dbfp-hover-black">
+        <i class="fa fa-eye dbfp-xxlarge"></i>
+        <p>VIEW STUDENTS</p>
+      </a>
+      <a href="/viewJob" class="dbfp-bar-item dbfp-button dbfp-padding-large" th:classappend="${viewName == 'view_jobs'} ? dbfp-black : dbfp-hover-black">
+        <i class="fa fa-eye dbfp-xxlarge"></i>
+        <p>VIEW JOBS</p>
+      </a>
+      <a href="/viewApplication" class="dbfp-bar-item dbfp-button dbfp-padding-large" th:classappend="${viewName == 'view_applications'} ? dbfp-black : dbfp-hover-black">
+        <i class="fa fa-eye dbfp-xxlarge"></i>
+        <p>VIEW APPLICATIONS</p>
+      </a>
+    </nav>
+  </body>
+</html>
