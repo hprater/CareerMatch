@@ -190,6 +190,12 @@ public class WebController {
         switch (searchMethod) {
             case 1 -> { // View all applications
                 List<ViewApplicationForm> applications = applicationRepo.getAllApplications();
+                if(applications == null) {
+                    ToastMessage toast = new ToastMessage();
+                    toast.setCssClass("alert alert-warning");
+                    toast.setMessage("No results returned");
+                    model.addAttribute("toast", toast);
+                }
                 model.addAttribute("allApplications", applications);
                 noList = false;
                 model.addAttribute("noList", noList);
@@ -223,6 +229,7 @@ public class WebController {
             , @RequestParam(value = "studentId", required = false, defaultValue = "0") long studentId
             , @RequestParam(value = "jobId", required = false, defaultValue = "0") long jobId, Model model) {
         log.info("***** viewApplication2 *****");
+        ToastMessage toast = new ToastMessage();
         model.addAttribute("searchMethod", searchMethod);
         boolean noList = false;
         Boolean initialLoad = false;
@@ -234,6 +241,12 @@ public class WebController {
                 model.addAttribute("noList", noList);
                 List<ViewApplicationForm> applications = applicationRepo.getApplicationByMajorId(major);
                 model.addAttribute("majorResults", applications);
+                if(applications == null) {
+                    toast.setCssClass("alert alert-warning");
+                    toast.setMessage("No results returned");
+                    model.addAttribute("toast", toast);
+                }
+                log.info("Applications : {}", applications);
             }
             case 3 -> {
                 List<Student> students = studentRepo.getAllStudents();
@@ -241,6 +254,11 @@ public class WebController {
                 model.addAttribute("noList", noList);
                 List<ViewApplicationForm> applications = applicationRepo.getApplicationByStudentId(studentId);
                 model.addAttribute("studentResults", applications);
+                if(applications == null) {
+                    toast.setCssClass("alert alert-warning");
+                    toast.setMessage("No results returned");
+                    model.addAttribute("toast", toast);
+                }
             }
             case 4 -> {
                 List<Job> jobs = jobRepo.getAllJobs();
@@ -248,6 +266,11 @@ public class WebController {
                 model.addAttribute("noList", noList);
                 List<ViewApplicationForm> applications = applicationRepo.getApplicationByJobId(jobId);
                 model.addAttribute("jobResults", applications);
+                if(applications == null) {
+                    toast.setCssClass("alert alert-warning");
+                    toast.setMessage("No results returned");
+                    model.addAttribute("toast", toast);
+                }
             }
             default -> {
                 noList = true;
