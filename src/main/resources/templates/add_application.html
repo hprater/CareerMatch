@@ -105,7 +105,7 @@
                         th:text="${students.getId()} + ' (' + ${students.getStudentName()} + ')'">Choose
                 </option>
         </select></div>
-        <br>
+        <p></p>
 
         <div><select name="jobId" id="jobId" class="dbfp-input dbfp-padding-16">
             <option disabled selected value>Select Job ID</option>
@@ -113,6 +113,7 @@
                     th:text="${jobs.getId()} + ' (' + ${jobs.getJobTitle()} + ')'">Choose
             </option>
         </select></div>
+        <p></p>
         <p>
             <button class="btn btn-primary" type="submit">
                 <i class="fa fa-paper-plane"></i> Submit
