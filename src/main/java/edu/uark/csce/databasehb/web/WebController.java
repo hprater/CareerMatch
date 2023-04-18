@@ -96,12 +96,18 @@ public class WebController {
 
     @GetMapping("/addApplication")
     public String addApplication(Model model) {
+        List<Student> students = studentRepo.getAllStudents();
+        List<Job> jobs = jobRepo.getAllJobs();
+        model.addAttribute("studentList", students);
+        model.addAttribute("jobList", jobs);
         return "add_application";
     }
 
     @PostMapping("/addApplication")
     public String addApplication(@ModelAttribute ApplicationForm form, Model model) {
         ToastMessage toast = new ToastMessage();
+        List<Student> students = studentRepo.getAllStudents();
+        List<Job> jobs = jobRepo.getAllJobs();
         if (form.isValid()) {
             try {
                 boolean duplicateValue = applicationRepo.addApplication(form);
@@ -119,6 +125,8 @@ public class WebController {
             toast.setMessage("Invalid Value(s) in form");
         }
         model.addAttribute("toast", toast);
+        model.addAttribute("studentList", students);
+        model.addAttribute("jobList", jobs);
         return "add_application";
     }
 
