@@ -24,138 +24,54 @@
       </form>
       <br>
 
-      <!-- View ALL Applications Output Table>-->
-      <div th:if="${allApplications}">
-        <div th:if="${noList}">
-          <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
+      <!-- View Applications Dropdown / Output Table>-->
+      <form th:unless="${allApplications}" action="/viewApplication2" method="post">
+        <input type="hidden" th:value="${searchMethod}" name="searchMethod"/>
+        <div th:if="${majorList}">
+          <select onchange="this.form.submit()" name="major" id="major" class="dbfp-input dbfp-padding-16">
+            <option th:each="major : ${majorList}" th:value="${major.getMajorId()}"
+                    th:text="${major.getMajorDescription()} + ' (' + ${major.getMajor()} + ')'"></option>
+          </select>
         </div>
-        <!-- Start of table >-->
-        <table class="dbfp-content-table" th:unless="${noList}">
-          <thead>
-            <tr>
-              <th>Student Name</th>
-              <th>Company Name</th>
-              <th>Salary</th>
-              <th>Major</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr th:each="applicationElement : ${allApplications}">
-              <td th:text="${applicationElement.getStudentName()}"></td>
-              <td th:text="${applicationElement.getCompanyName()}"></td>
-              <td th:text="${'$' + applicationElement.getSalary()}"></td>
-              <td th:text="${applicationElement.getMajorDescription()}"></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- View Applications by Major Dropdown / Output Table>-->
-      <div th:if="${majorList}">
-        <form action="/viewApplication2" method="post">
-          <input type="hidden" th:value="${searchMethod}" name="searchMethod" />
-          <div><select onchange="this.form.submit()" name="major" id="major" class="dbfp-input dbfp-padding-16">
-              <option th:each="major : ${majorList}" th:value="${major.getMajorId()}"
-                      th:text="${major.getMajorDescription()} + ' (' + ${major.getMajor()} + ')'">Choose
-              </option>
-          </select></div>
-        </form>
-        <div th:if="${noList}">
-          <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
+        <div th:if="${studentList}">
+          <select onchange="this.form.submit()" name="studentId" id="studentId"
+                  class="dbfp-input dbfp-padding-16">
+            <option disabled selected value>Select Student</option>
+            <option th:each="student : ${studentList}" th:value="${student.getId()}"
+                    th:text="${student.getId()} + ' (' + ${student.getStudentName()} + ')'"></option>
+          </select>
         </div>
-        <!-- Start of table >-->
-        <table class="dbfp-content-table" th:unless="${noList}">
-          <thead>
-            <tr>
-              <th>Student Name</th>
-              <th>Company Name</th>
-              <th>Salary</th>
-              <th>Major</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr th:each="majorElement : ${majorResults}">
-              <td th:text="${majorElement.getStudentName()}"></td>
-              <td th:text="${majorElement.getCompanyName()}"></td>
-              <td th:text="${'$' + majorElement.getSalary()}"></td>
-              <td th:text="${majorElement.getMajorDescription()}"></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- View Applications by Student Dropdown / Output Table>-->
-      <div th:if="${studentList}">
-        <form action="/viewApplication2" method="post">
-          <div><select onchange="this.form.submit()" name="studentId" id="studentId"
-                       class="dbfp-input dbfp-padding-16">
-            <optgroup label="Students">
-              <option disabled selected value>Select Student</option>
-              <option th:each="student : ${studentList}" th:value="${student.getId()}"
-                      th:text="${student.getId()} + ' (' + ${student.getStudentName()} + ')'">Choose
-              </option>
-            </optgroup>
-          </select></div>
-        </form>
-        <div th:if="${noList}">
-          <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
+        <div th:if="${jobList}">
+          <select onchange="this.form.submit()" name="jobId" id="jobId" class="dbfp-input dbfp-padding-16">
+            <option disabled selected value>Select Job</option>
+            <option th:each="job : ${jobList}" th:value="${job.getId()}"
+                    th:text="${job.getJobTitle()} + ' (' + ${job.getCompanyName()} + ')'">Choose
+            </option>
+          </select>
         </div>
-        <!-- Start of table >-->
-        <table class="dbfp-content-table" th:unless="${noList}">
-          <thead>
-            <tr>
-              <th>Student Name</th>
-              <th>Company Name</th>
-              <th>Salary</th>
-              <th>Major</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr th:each="studentElement : ${studentResults}">
-              <td th:text="${studentElement.getStudentName()}"></td>
-              <td th:text="${studentElement.getCompanyName()}"></td>
-              <td th:text="${'$' + studentElement.getSalary()}"></td>
-              <td th:text="${studentElement.getMajorDescription()}"></td>
-            </tr>
-          </tbody>
-        </table>
+      </form>
+      <div th:if="${noList}">
+        <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
       </div>
-
-      <!-- View Applications by Jobs Dropdown / Output Table>-->
-      <div th:if="${jobList}">
-        <form action="/viewApplication2" method="post">
-          <div><select onchange="this.form.submit()" name="jobId" id="jobId" class="dbfp-input dbfp-padding-16">
-            <optgroup label="Jobs">
-              <option disabled selected value>Select Job</option>
-              <option th:each="job : ${jobList}" th:value="${job.getId()}"
-                      th:text="${job.getJobTitle()} + ' (' + ${job.getCompanyName()} + ')'">Choose
-              </option>
-            </optgroup>
-          </select></div>
-        </form>
-        <div th:if="${noList}">
-          <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
-        </div>
-        <!-- Start of table >-->
-        <table class="dbfp-content-table" th:unless="${noList}">
-          <thead>
-            <tr>
-              <th>Student Name</th>
-              <th>Company Name</th>
-              <th>Salary</th>
-              <th>Major</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr th:each="jobElement : ${jobResults}">
-              <td th:text="${jobElement.getStudentName()}"></td>
-              <td th:text="${jobElement.getCompanyName()}"></td>
-              <td th:text="${'$' + jobElement.getSalary()}"></td>
-              <td th:text="${jobElement.getMajorDescription()}"></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <!-- Start of table >-->
+      <table class="dbfp-content-table" th:unless="${noList}">
+        <thead>
+          <tr>
+            <th>Student Name</th>
+            <th>Company Name</th>
+            <th>Salary</th>
+            <th>Major</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="app : ${applicationList}">
+            <td th:text="${app.getStudentName()}"></td>
+            <td th:text="${app.getCompanyName()}"></td>
+            <td th:text="${'$' + app.getSalary()}"></td>
+            <td th:text="${app.getMajorDescription()}"></td>
+          </tr>
+        </tbody>
+      </table>
     </main>
     <div th:replace="~{fragments/footer :: footer}">Footer goes here!</div>
   </body>

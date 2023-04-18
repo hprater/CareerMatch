@@ -12,22 +12,25 @@
           <div th:text="${toast.getMessage()}"></div>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
+      <br/>
         <h2 style="font-family:Castellar; font-size: 40px"> Add Student</h2>
         <form action="/addStudent" method="post">
           <div class="form-group">
             <label for="studentId">Student ID</label>
-            <input id="studentId" class="form-control" type="text" required
+            <input id="studentId" class="form-control form-control-lg" type="text" required
                    name="studentId">
           </div>
+          <br/>
           <div class="form-group">
-            <label for="studentName">Student Name</label>
-            <input id="studentName" class="form-control" type="text"
+            <!--<label for="studentName">Student Name</label>-->
+            <input id="studentName" placeholder="Student Name" class="form-control form-control-lg" type="text"
                    required
                    name="studentName">
           </div>
+          <br/>
           <div class="form-group">
-            <label for="major">Select Major</label>
-            <select name="major" id="major" class="form-control">
+            <label for="major">Major</label>
+            <select name="major" id="major" class="form-control form-control-lg">
               <option selected disabled value="-1"></option>
               <option th:each="major : ${majors}" th:value="${major.majorId}"
                       th:text="${major.majorDescription} + ' (' + ${major.getMajor()} + ')'">Choose

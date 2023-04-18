@@ -192,6 +192,7 @@ public class WebController {
             }
             case 2 -> { // View all applications by specified majorId
                 List<Major> majors = majorRepository.getAllMajors();
+                majors.add(0, new Major(-1, "Select", "Majors"));
                 model.addAttribute("majorList", majors);
             }
             case 3 -> { // View all applications by specified studentId
@@ -215,27 +216,27 @@ public class WebController {
             , @RequestParam(value = "studentId", required = false, defaultValue = "0") long studentId
             , @RequestParam(value = "jobId", required = false, defaultValue = "0") long jobId, Model model) {
         log.info("***** viewApplication2 *****");
-        boolean noList = false;
+        boolean noList = true;
+        List<ViewApplicationForm> applicationFormList = new ArrayList<>();
         switch (searchMethod) {
             case 2 -> {
                 model.addAttribute("majorList", majorRepository.getAllMajors());
-                model.addAttribute("majorResults", applicationRepo.getApplicationByMajorId(major));
+                applicationFormList = applicationRepo.getApplicationByMajorId(major);
             }
             case 3 -> {
                 model.addAttribute("studentList", studentRepo.getAllStudents());
-                model.addAttribute("studentResults", applicationRepo.getApplicationByStudentId(studentId));
+                applicationFormList = applicationRepo.getApplicationByStudentId(studentId);
             }
             case 4 -> {
                 model.addAttribute("jobList", jobRepo.getAllJobs());
-                model.addAttribute("jobResults", applicationRepo.getApplicationByJobId(jobId));
-            }
-            default -> {
-                noList = true;
+                applicationFormList = applicationRepo.getApplicationByJobId(jobId);
             }
         }
+        if(!applicationFormList.isEmpty()) noList = false;
         model.addAttribute("noList", noList);
         model.addAttribute("searchMethod", searchMethod);
         model.addAttribute("viewName", "view_applications");
+        model.addAttribute("applicationList", applicationFormList);
         return "view_applications";
     }
 
