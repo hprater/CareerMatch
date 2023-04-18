@@ -1,4 +1,4 @@
-package edu.uark.csce.databasehb.data;
+package edu.uark.csce.databasehb.model.job;
 
 public class Job {
     private long id, salary;

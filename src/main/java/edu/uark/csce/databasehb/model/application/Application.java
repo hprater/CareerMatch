@@ -1,4 +1,4 @@
-package edu.uark.csce.databasehb.data;
+package edu.uark.csce.databasehb.model.application;
 
 public class Application {
     private int applicationId;

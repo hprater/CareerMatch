@@ -1,12 +1,12 @@
 package edu.uark.csce.databasehb.service;
 
-import edu.uark.csce.databasehb.data.ApplicationRepository;
-import edu.uark.csce.databasehb.data.Job;
-import edu.uark.csce.databasehb.data.JobRepository;
-import edu.uark.csce.databasehb.data.Major;
-import edu.uark.csce.databasehb.data.MajorRepository;
-import edu.uark.csce.databasehb.data.Student;
-import edu.uark.csce.databasehb.data.StudentRepository;
+import edu.uark.csce.databasehb.model.application.ApplicationRepository;
+import edu.uark.csce.databasehb.model.job.Job;
+import edu.uark.csce.databasehb.model.job.JobRepository;
+import edu.uark.csce.databasehb.model.major.Major;
+import edu.uark.csce.databasehb.model.major.MajorRepository;
+import edu.uark.csce.databasehb.model.student.Student;
+import edu.uark.csce.databasehb.model.student.StudentRepository;
 import edu.uark.csce.databasehb.web.application.ApplicationForm;
 import edu.uark.csce.databasehb.web.application.ViewApplicationForm;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package edu.uark.csce.databasehb.data;
+package edu.uark.csce.databasehb.model.student;
 
 import edu.uark.csce.databasehb.web.student.StudentForm;
 import org.springframework.dao.DataIntegrityViolationException;

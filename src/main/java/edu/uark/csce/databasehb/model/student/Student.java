@@ -1,4 +1,4 @@
-package edu.uark.csce.databasehb.data;
+package edu.uark.csce.databasehb.model.student;
 
 public class Student {
     private long id;

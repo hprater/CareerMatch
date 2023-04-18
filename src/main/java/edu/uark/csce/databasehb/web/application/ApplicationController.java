@@ -1,13 +1,14 @@
 package edu.uark.csce.databasehb.web.application;
 
-import edu.uark.csce.databasehb.data.Job;
-import edu.uark.csce.databasehb.data.Major;
-import edu.uark.csce.databasehb.data.Student;
+import edu.uark.csce.databasehb.model.job.Job;
+import edu.uark.csce.databasehb.model.major.Major;
+import edu.uark.csce.databasehb.model.student.Student;
 import edu.uark.csce.databasehb.model.ToastMessage;
 import edu.uark.csce.databasehb.service.ApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +22,20 @@ public class ApplicationController {
 
     public ApplicationController(ApplicationService service) {
         this.service = service;
+    }
+
+    @GetMapping("/addApplication")
+    public String addApplication(Model model) {
+        model.addAttribute("viewName", "add_application");
+        return "add_application";
+    }
+
+    @GetMapping("/viewApplication")
+    public String viewApplication(Model model) {
+        model.addAttribute("noList", true);
+        model.addAttribute("searchMethod", 0);
+        model.addAttribute("viewName", "view_applications");
+        return "view_applications";
     }
 
     @PostMapping("/addApplication")

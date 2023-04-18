@@ -1,4 +1,4 @@
-package edu.uark.csce.databasehb.data;
+package edu.uark.csce.databasehb.model.application;
 
 import edu.uark.csce.databasehb.web.application.ApplicationForm;
 import edu.uark.csce.databasehb.web.application.ViewApplicationForm;

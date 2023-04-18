@@ -68,7 +68,7 @@
           <tr th:each="app : ${applicationList}">
             <td th:text="${app.getStudentName()}"></td>
             <td th:text="${app.getCompanyName()}"></td>
-            <td th:text="${'$' + app.getSalary()}"></td>
+            <td th:text="${#numbers.formatCurrency(app.getSalary())}"></td>
             <td th:text="${app.getMajorDescription()}"></td>
           </tr>
         </tbody>
