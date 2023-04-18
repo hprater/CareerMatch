@@ -1,4 +1,4 @@
-package edu.uark.csce.databasehb.web;
+package edu.uark.csce.databasehb.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

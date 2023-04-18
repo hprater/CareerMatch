@@ -1,7 +1,6 @@
 package edu.uark.csce.databasehb.data;
 
-import edu.uark.csce.databasehb.web.StudentForm;
-import org.springframework.dao.DataAccessException;
+import edu.uark.csce.databasehb.web.student.StudentForm;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;

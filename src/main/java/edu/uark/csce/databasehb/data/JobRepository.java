@@ -1,12 +1,10 @@
 package edu.uark.csce.databasehb.data;
 
-import edu.uark.csce.databasehb.web.JobForm;
-import edu.uark.csce.databasehb.web.StudentForm;
+import edu.uark.csce.databasehb.web.job.JobForm;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,13 +1,12 @@
 package edu.uark.csce.databasehb.data;
 
-import edu.uark.csce.databasehb.web.ApplicationForm;
-import edu.uark.csce.databasehb.web.ViewApplicationForm;
+import edu.uark.csce.databasehb.web.application.ApplicationForm;
+import edu.uark.csce.databasehb.web.application.ViewApplicationForm;
 import org.springframework.dao.DataIntegrityViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.List;
 

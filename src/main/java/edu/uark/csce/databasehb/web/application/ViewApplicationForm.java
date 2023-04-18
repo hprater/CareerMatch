@@ -1,4 +1,4 @@
-package edu.uark.csce.databasehb.web;
+package edu.uark.csce.databasehb.web.application;
 
 public class ViewApplicationForm {
     private String studentName;

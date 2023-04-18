@@ -1,5 +1,6 @@
 package edu.uark.csce.databasehb.web;
 
+import edu.uark.csce.databasehb.web.student.StudentForm;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;

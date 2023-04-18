@@ -1,11 +1,9 @@
 package edu.uark.csce.databasehb.web;
 
-import edu.uark.csce.databasehb.data.Major;
+import edu.uark.csce.databasehb.web.job.JobForm;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
-
-import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS;

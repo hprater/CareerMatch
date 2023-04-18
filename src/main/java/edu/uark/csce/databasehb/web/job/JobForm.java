@@ -1,4 +1,4 @@
-package edu.uark.csce.databasehb.web;
+package edu.uark.csce.databasehb.web.job;
 
 import edu.uark.csce.databasehb.data.Major;
 
