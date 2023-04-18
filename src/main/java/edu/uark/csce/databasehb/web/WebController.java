@@ -187,8 +187,8 @@ public class WebController {
         switch (searchMethod) {
             case 1 -> { // View all applications
                 List<ViewApplicationForm> applications = applicationRepo.getAllApplications();
-                model.addAttribute("allApplications", applications);
-                noList = false;
+                model.addAttribute("applicationList", applications);
+                if (!applications.isEmpty()) noList = false;
             }
             case 2 -> { // View all applications by specified majorId
                 List<Major> majors = majorRepository.getAllMajors();
@@ -217,10 +217,12 @@ public class WebController {
             , @RequestParam(value = "jobId", required = false, defaultValue = "0") long jobId, Model model) {
         log.info("***** viewApplication2 *****");
         boolean noList = true;
-        List<ViewApplicationForm> applicationFormList = new ArrayList<>();
+        List<ViewApplicationForm> applicationFormList = null;
         switch (searchMethod) {
             case 2 -> {
-                model.addAttribute("majorList", majorRepository.getAllMajors());
+                List<Major> majors = majorRepository.getAllMajors();
+                majors.add(0, majors.stream().filter(s -> s.getMajorId() == major).toList().get(0));
+                model.addAttribute("majorList", majors);
                 applicationFormList = applicationRepo.getApplicationByMajorId(major);
             }
             case 3 -> {
@@ -232,7 +234,7 @@ public class WebController {
                 applicationFormList = applicationRepo.getApplicationByJobId(jobId);
             }
         }
-        if(!applicationFormList.isEmpty()) noList = false;
+        if(applicationFormList != null) noList = false;
         model.addAttribute("noList", noList);
         model.addAttribute("searchMethod", searchMethod);
         model.addAttribute("viewName", "view_applications");
