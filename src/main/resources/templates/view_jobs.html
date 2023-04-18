@@ -129,7 +129,7 @@
             <td th:text="${job.getId()}"></td>
             <td th:text="${job.getCompanyName()}"></td>
             <td th:text="${job.getJobTitle()}"></td>
-            <td th:text="${'$' + job.getSalary()}"></td>
+            <td th:text="${#numbers.formatCurrency(job.getSalary())}"></td>
         </tr>
         </tbody>
     </table>

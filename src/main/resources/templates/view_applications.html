@@ -255,7 +255,7 @@
             <tr th:each="jobElement : ${jobResults}">
                 <td th:text="${jobElement.getStudentName()}"></td>
                 <td th:text="${jobElement.getCompanyName()}"></td>
-                <td th:text="${'$' + jobElement.getSalary()}"></td>
+                <td th:text="${#numbers.formatCurrency(jobElement.getSalary())}"></td>
                 <td th:text="${jobElement.getMajorDescription()}"></td>
             </tr>
             </tbody>
