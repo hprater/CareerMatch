@@ -235,6 +235,10 @@ public class WebController {
             }
         }
         if(applicationFormList != null) noList = false;
+        if(noList) {
+            ToastMessage toast = new ToastMessage("alert-warning","No results returned","fa-exclamation-triangle");
+            model.addAttribute("toast", toast);
+        }
         model.addAttribute("noList", noList);
         model.addAttribute("searchMethod", searchMethod);
         model.addAttribute("viewName", "view_applications");

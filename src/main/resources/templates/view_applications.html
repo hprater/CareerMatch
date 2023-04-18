@@ -8,6 +8,11 @@
     <div th:replace="~{fragments/navigation :: navigation}">Navigation goes here!</div>
     <!-- Top of Web Page Header >-->
     <main class="container">
+      <div th:if="${toast}" th:class="${toast.getCssClass()}" role="alert">
+        <i class="fa fa-fw" th:classappend="${toast.getSymbol()}"></i>
+        <div th:text="${toast.getMessage()}"></div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
       <h2 style="font-family:Castellar; font-size: 40px"> View Applications </h2>
       <!-- Dropdown to select search method>-->
       <form action="/viewApplication" method="post">
