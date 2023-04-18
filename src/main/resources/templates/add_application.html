@@ -99,10 +99,20 @@
     <h2 style="font-family:Castellar; font-size: 40px"> Add Application </h2>
 
     <form action="/addApplication" method="post">
-        <p><input id="studentId" class="dbfp-input dbfp-padding-16" type="text" placeholder="Student ID" required
-                  name="studentId"></p>
-        <p><input id="jobId" class="dbfp-input dbfp-padding-16" type="text" placeholder="Job ID" required name="jobId">
-        </p>
+        <div><select name="studentId" id="studentId" class="dbfp-input dbfp-padding-16">
+            <option disabled selected value>Select Student ID</option>
+                <option th:each="students : ${studentList}" th:value="${students.getId()}"
+                        th:text="${students.getId()} + ' (' + ${students.getStudentName()} + ')'">Choose
+                </option>
+        </select></div>
+        <br>
+
+        <div><select name="jobId" id="jobId" class="dbfp-input dbfp-padding-16">
+            <option disabled selected value>Select Job ID</option>
+            <option th:each="jobs : ${jobList}" th:value="${jobs.getId()}"
+                    th:text="${jobs.getId()} + ' (' + ${jobs.getJobTitle()} + ')'">Choose
+            </option>
+        </select></div>
         <p>
             <button class="btn btn-primary" type="submit">
                 <i class="fa fa-paper-plane"></i> Submit
