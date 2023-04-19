@@ -8,9 +8,21 @@
       <br/>
       <h2 style="font-family:Castellar; font-size: 40px"> Add Application </h2>
       <form action="/addApplication" method="post">
-        <p><input id="studentId" class="form-control form-control-lg" type="text" placeholder="Student ID" required
-                  name="studentId"></p>
-        <p><input id="jobId" class="form-control form-control-lg" type="text" placeholder="Job ID" required name="jobId">
+        <p>
+        <select th:field="${form.selectedStudent}" class="form-control form-control-lg">
+          <option disabled selected value="0">Select Student ID</option>
+          <option th:each="students : ${form.studentList}" th:value="${students.id}"
+                  th:text="${students.id} + ' (' + ${students.studentName} + ')'">Choose
+          </option>
+        </select>
+        </p>
+        <p>
+          <select th:field="${form.selectedJob}" class="form-control form-control-lg">
+            <option disabled selected value="0">Select Job ID</option>
+            <option th:each="jobs : ${form.getJobList()}" th:value="${jobs.id}"
+                    th:text="${jobs.companyName()} + ' (' + ${jobs.jobTitle} + ')'">Choose
+            </option>
+          </select>
         </p>
         <p>
           <button class="btn btn-primary" type="submit">

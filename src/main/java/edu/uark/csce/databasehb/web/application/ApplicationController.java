@@ -26,8 +26,38 @@ public class ApplicationController {
 
     @GetMapping("/addApplication")
     public String addApplication(Model model) {
+        AddApplicationForm form = populateForm(new AddApplicationForm());
+        model.addAttribute("form", form);
         model.addAttribute("viewName", "add_application");
         return "add_application";
+    }
+
+    @PostMapping("/addApplication")
+    public String addApplication(@ModelAttribute AddApplicationForm form, Model model) {
+        ToastMessage toast = new ToastMessage();
+        log.info("FORM : {}", form);
+        if(form.getSelectedStudent() < 1 || form.getSelectedJob() < 1) {
+            toast.setMessage("Please make a selection from both dropdowns");
+            toast.setCssClass("alert-warning", "fa-question-circle");
+        } else {
+            try {
+                service.addApplication(form);
+                toast.setMessage("Application added/updated in database");
+            } catch (Exception e) {
+                toast.setCssClass("alert-danger", "fa-exclamation-triangle");
+                toast.setMessage(e.getMessage());
+            }
+        }
+        model.addAttribute("toast", toast);
+        model.addAttribute("form", populateForm(form));
+        model.addAttribute("viewName", "add_application");
+        return "add_application";
+    }
+
+    private AddApplicationForm populateForm(AddApplicationForm form) {
+        form.setStudentList(service.getAllStudents());
+        form.setJobList(service.getAllJobs());
+        return form;
     }
 
     @GetMapping("/viewApplication")
@@ -36,25 +66,6 @@ public class ApplicationController {
         model.addAttribute("form", form);
         model.addAttribute("viewName", "view_applications");
         return "view_applications";
-    }
-
-    @PostMapping("/addApplication")
-    public String addApplication(@ModelAttribute AddApplicationForm form, Model model) {
-        ToastMessage toast = new ToastMessage();
-        try {
-            boolean duplicateValue = service.addApplication(form);
-            if (duplicateValue) {
-                toast.setMessage("Application already exists in the database");
-                toast.setCssClass("alert-warning", "fa-question-circle");
-            } else
-                toast.setMessage("Application has been added to the database");
-        } catch (Exception e) {
-            toast.setCssClass("alert-danger", "fa-exclamation-triangle");
-            toast.setMessage(e.getMessage());
-        }
-        model.addAttribute("toast", toast);
-        model.addAttribute("viewName", "add_application");
-        return "add_application";
     }
 
     @PostMapping("/viewApplication")
@@ -70,9 +81,9 @@ public class ApplicationController {
                 List<Major> majors = service.getAllMajors();
 //                majors.add(0, new Major(-1, "Select", "Majors"));
                 form.setMajorList(majors);
-                if(form.getSelectedMajor() > 0) {
+                if (form.getSelectedMajor() > 0) {
                     form.setApplicationTableList(service.getApplicationByMajorId(form.getSelectedMajor()));
-                    if(form.getApplicationTableList().isEmpty())
+                    if (form.getApplicationTableList().isEmpty())
                         model.addAttribute("toast", getEmptyToast());
                 }
             }
@@ -80,18 +91,18 @@ public class ApplicationController {
                 List<Student> studentList = service.getAllStudents();
                 //studentList.add(0, new Student(0, "Select...", ""));
                 form.setStudentList(studentList);
-                if(form.getSelectedStudent() > 0) {
+                if (form.getSelectedStudent() > 0) {
                     form.setApplicationTableList(service.getApplicationByStudentId(form.getSelectedStudent()));
-                    if(form.getApplicationTableList().isEmpty())
+                    if (form.getApplicationTableList().isEmpty())
                         model.addAttribute("toast", getEmptyToast());
 
                 }
             }
             case 4 -> { // View all applications by specified jobId
                 form.setJobList(service.getAllJobs());
-                if(form.getSelectedJob() > 0) {
+                if (form.getSelectedJob() > 0) {
                     form.setApplicationTableList(service.getApplicationByJobId(form.getSelectedJob()));
-                    if(form.getApplicationTableList().isEmpty())
+                    if (form.getApplicationTableList().isEmpty())
                         model.addAttribute("toast", getEmptyToast());
 
                 }

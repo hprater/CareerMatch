@@ -28,8 +28,8 @@ public class ApplicationService {
     }
 
 
-    public boolean addApplication(AddApplicationForm form) {
-        return applicationRepo.addApplication(form);
+    public void addApplication(AddApplicationForm form) {
+        applicationRepo.addApplication(form);
     }
 
     public List<ViewApplicationTable> getAllApplications() {
