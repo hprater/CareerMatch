@@ -1,7 +1,6 @@
 package edu.uark.csce.databasehb.web.job;
 
 import edu.uark.csce.databasehb.model.ToastMessage;
-import edu.uark.csce.databasehb.model.job.Job;
 import edu.uark.csce.databasehb.model.major.Major;
 import edu.uark.csce.databasehb.service.JobService;
 import lombok.extern.slf4j.Slf4j;
@@ -11,9 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+
+import static edu.uark.csce.databasehb.web.application.ApplicationController.getEmptyToast;
 
 @Slf4j
 @Controller
@@ -31,33 +31,6 @@ public class JobController {
         model.addAttribute("viewName", "add_job");
         return "add_job";
     }
-
-    @GetMapping("/viewJob")
-    public String viewJob(Model model) {
-        log.info("ViewJobs GET");
-        List<Major> majors = service.getAllMajors();
-        Boolean initialLoad = true;
-        model.addAttribute("majors", majors);
-        model.addAttribute("initialLoad", initialLoad);
-        model.addAttribute("viewName", "view_jobs");
-        return "view_jobs";
-    }
-
-    @PostMapping("/viewJob")
-    public String viewJob(@RequestParam("major") Integer major, Model model) {
-        log.info("ViewJobs POST");
-        List<Major> majors = service.getAllMajors();
-        majors.add(0, majors.stream().filter(s -> s.getMajorId() == major).toList().get(0));
-        log.info("MajorList: {}", majors);
-        model.addAttribute("majors", majors);
-        List<Job> jobList = service.getJobByMajor(major);
-        Boolean initialLoad = false;
-        model.addAttribute("jobs", jobList);
-        model.addAttribute("initialLoad", initialLoad);
-        model.addAttribute("viewName", "view_jobs");
-        return "view_jobs";
-    }
-
 
     @PostMapping("/addJob")
     public String addJob(@ModelAttribute JobForm form, Model model) {
@@ -85,5 +58,24 @@ public class JobController {
         return "add_job";
     }
 
+    @GetMapping("/viewJob")
+    public String viewJob(Model model) {
+        ViewJobForm form = new ViewJobForm();
+        form.setMajorList(service.getAllMajors());
+        model.addAttribute("form", form);
+        model.addAttribute("viewName", "view_jobs");
+        return "view_jobs";
+    }
 
+    @PostMapping("/viewJob")
+    public String viewJob(@ModelAttribute ViewJobForm form, Model model) {
+        form.getJobList().clear();
+        form.setMajorList(service.getAllMajors());
+        form.setJobList(service.getJobByMajor(form.getSelectedMajor()));
+        if(form.getJobList().isEmpty())
+            model.addAttribute("toast", getEmptyToast());
+        model.addAttribute("form", form);
+        model.addAttribute("viewName", "view_jobs");
+        return "view_jobs";
+    }
 }

@@ -2,7 +2,6 @@ package edu.uark.csce.databasehb.model.job;
 
 import edu.uark.csce.databasehb.model.major.Major;
 import edu.uark.csce.databasehb.web.job.JobForm;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -24,15 +23,15 @@ public class JobRepository {
 
     public List<Job> getAllJobs() {
         List<Job> jobs = new ArrayList<>(template.query("SELECT * FROM jobs",
-                (rs, rowNum) -> new Job(rs.getLong("job_id"), rs.getString("company_name"), rs.getString("job_title"), rs.getLong("salary"))));
-        return jobs.isEmpty() ? null : jobs;
+                (rs, rowNum) -> new Job(rs.getLong("job_id"),rs.getLong("salary"), rs.getString("company_name"), rs.getString("job_title"))));
+        return jobs;
     }
 
     public List<Job> getJobByMajor(int major) {
         List<Job> jobs = new ArrayList<>(template.query(
                 "SELECT j.job_id, company_name, job_title, salary, major_id FROM jobs j, job_majors m WHERE j.job_id = m.job_id AND m.major_id = ?;",
-                (rs, rowNum) -> new Job(rs.getLong("job_id"), rs.getString("company_name"), rs.getString("job_title"), rs.getLong("salary")), major));
-        return jobs.isEmpty() ? null : jobs;
+                (rs, rowNum) -> new Job(rs.getLong("job_id"), rs.getLong("salary"), rs.getString("company_name"), rs.getString("job_title")), major));
+        return jobs;
     }
 
     public Job addJob(JobForm form) {
@@ -46,7 +45,7 @@ public class JobRepository {
             return ps;
         }, keyHolder);
         BigInteger jobId = (BigInteger) keyHolder.getKey();
-        return new Job(jobId.longValue(), form.getCompanyName(), form.getJobTitle(), form.getSalary());
+        return new Job(jobId.longValue(), form.getSalary(), form.getCompanyName(), form.getJobTitle());
     }
 
     public Long getJobID(JobForm form) {
@@ -54,7 +53,7 @@ public class JobRepository {
     }
 
     public void addJobMajor(Job job, Major major) {
-        template.update("INSERT INTO job_majors (job_id, major_id) VALUES (?, ?)", job.getId(), major.getMajorId());
+        template.update("INSERT INTO job_majors (job_id, major_id) VALUES (?, ?)", job.id(), major.getMajorId());
     }
 }
 

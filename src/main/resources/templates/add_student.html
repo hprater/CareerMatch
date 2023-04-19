@@ -12,23 +12,21 @@
         <h2 style="font-family:Castellar; font-size: 40px"> Add Student</h2>
         <form action="/addStudent" method="post">
           <div class="form-group">
-            <label for="studentId">Student ID</label>
-            <input id="studentId" class="form-control form-control-lg" type="text" required
+            <input id="studentId" placeholder="Student ID" th:value="${form.studentId}" class="form-control form-control-lg" type="text" required
                    name="studentId">
           </div>
           <br/>
           <div class="form-group">
-            <!--<label for="studentName">Student Name</label>-->
-            <input id="studentName" placeholder="Student Name" class="form-control form-control-lg" type="text"
+            <input id="studentName" placeholder="Student Name" th:value="${form.studentName}" class="form-control form-control-lg" type="text"
                    required
                    name="studentName">
           </div>
           <br/>
           <div class="form-group">
-            <label for="major">Major</label>
-            <select name="major" id="major" class="form-control form-control-lg">
-              <option selected disabled value="-1"></option>
+            <select name="major" id="major" th:value="${form.major}" class="form-control form-control-lg">
+              <option disabled selected value="0">Select Major</option>
               <option th:each="major : ${majors}" th:value="${major.majorId}"
+                      th:selected="${major.majorId==form.major}"
                       th:text="${major.majorDescription} + ' (' + ${major.getMajor()} + ')'">Choose
               </option>
             </select>

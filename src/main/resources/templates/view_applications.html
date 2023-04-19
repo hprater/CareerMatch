@@ -9,53 +9,55 @@
     <!-- Top of Web Page Header >-->
     <main class="container">
       <div th:replace="~{fragments/toast :: toast}"></div>
+      <br/>
       <h2 style="font-family:Castellar; font-size: 40px"> View Applications </h2>
       <!-- Dropdown to select search method>-->
       <form action="/viewApplication" method="post">
         <div>
-          <select onchange="this.form.submit()" name="searchMethod" id="searchMethod"
-                  class="dbfp-input dbfp-padding-16">
-            <option th:selected="${searchMethod==0}" value>Search By</option>
-            <option th:selected="${searchMethod==1}" value="1">View All Applications</option>
-            <option th:selected="${searchMethod==2}" value="2">View All Applications by Major</option>
-            <option th:selected="${searchMethod==3}" value="3">View All Applications by Student ID</option>
-            <option th:selected="${searchMethod==4}" value="4">View All Applications by Specific Job</option>
+          <select onchange="this.form.submit()" th:field="${form.searchMethod}" name="searchMethod" id="searchMethod"
+                  class="form-control form-control-lg">
+            <option th:selected="${form.searchMethod==0}" value="0">Search By</option>
+            <option th:selected="${form.searchMethod==1}" value="1">View All Applications</option>
+            <option th:selected="${form.searchMethod==2}" value="2">View All Applications by Major</option>
+            <option th:selected="${form.searchMethod==3}" value="3">View All Applications by Student ID</option>
+            <option th:selected="${form.searchMethod==4}" value="4">View All Applications by Specific Job</option>
           </select>
         </div>
       </form>
       <br>
 
       <!-- View Applications Dropdown / Output Table>-->
-      <form th:unless="${allApplications}" action="/viewApplication2" method="post">
-        <input type="hidden" th:value="${searchMethod}" name="searchMethod"/>
-        <div th:if="${majorList}">
-          <select onchange="this.form.submit()" name="major" id="major" class="dbfp-input dbfp-padding-16">
-            <option th:each="major : ${majorList}" th:value="${major.getMajorId()}"
+      <form th:if="${form.searchMethod>1}" action="/viewApplication" method="post">
+        <input hidden th:field="${form.searchMethod}">
+        <div th:if="${form.searchMethod==2}">
+          <select onchange="this.form.submit()" th:field="${form.selectedMajor}" name="major" id="major" class="form-control form-control-lg">
+            <option disabled selected value="0">Select Major</option>
+            <option th:each="major : ${form.majorList}" th:value="${major.getMajorId()}"
                     th:text="${major.getMajorDescription()} + ' (' + ${major.getMajor()} + ')'"></option>
           </select>
         </div>
-        <div th:if="${studentList}">
-          <select onchange="this.form.submit()" name="studentId" id="studentId"
-                  class="dbfp-input dbfp-padding-16">
-            <option disabled selected value>Select Student</option>
-            <option th:each="student : ${studentList}" th:value="${student.getId()}"
-                    th:text="${student.getId()} + ' (' + ${student.getStudentName()} + ')'"></option>
+        <div th:if="${form.searchMethod==3}">
+          <select onchange="this.form.submit()" th:field="${form.selectedStudent}" name="studentId" id="studentId"
+                  class="form-control form-control-lg">
+            <option disabled selected value="0">Select Student</option>
+            <option th:each="student : ${form.studentList}" th:value="${student.id}"
+                    th:text="${student.studentName()}"></option>
           </select>
         </div>
-        <div th:if="${jobList}">
-          <select onchange="this.form.submit()" name="jobId" id="jobId" class="dbfp-input dbfp-padding-16">
-            <option disabled selected value>Select Job</option>
-            <option th:each="job : ${jobList}" th:value="${job.getId()}"
-                    th:text="${job.getJobTitle()} + ' (' + ${job.getCompanyName()} + ')'">Choose
+        <div th:if="${form.searchMethod==4}">
+          <select onchange="this.form.submit()" th:field="${form.selectedJob}" name="jobId" id="jobId" class="form-control form-control-lg">
+            <option disabled selected value="0">Select Job</option>
+            <option th:each="job : ${form.jobList}" th:value="${job.id}"
+                    th:text="${job.jobTitle} + ' (' + ${job.companyName} + ')'">Choose
             </option>
           </select>
         </div>
       </form>
-      <div th:if="${noList}">
+      <div th:if="${#lists.isEmpty(form.getApplicationTableList())}">
         <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
       </div>
       <!-- Start of table >-->
-      <table class="dbfp-content-table" th:unless="${noList}">
+      <table class="dbfp-content-table" th:unless="${#lists.isEmpty(form.getApplicationTableList())}">
         <thead>
           <tr>
             <th>Student Name</th>
@@ -65,7 +67,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr th:each="app : ${applicationList}">
+          <tr th:each="app : ${form.getApplicationTableList()}">
             <td th:text="${app.getStudentName()}"></td>
             <td th:text="${app.getCompanyName()}"></td>
             <td th:text="${#numbers.formatCurrency(app.getSalary())}"></td>

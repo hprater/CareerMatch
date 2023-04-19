@@ -5,11 +5,12 @@
     <div th:replace="~{fragments/navigation :: navigation}">Navigation goes here!</div>
     <main class="container">
       <div th:replace="~{fragments/toast :: toast}"></div>
+      <br/>
       <h2 style="font-family:Castellar; font-size: 40px"> Add Application </h2>
       <form action="/addApplication" method="post">
-        <p><input id="studentId" class="dbfp-input dbfp-padding-16" type="text" placeholder="Student ID" required
+        <p><input id="studentId" class="form-control form-control-lg" type="text" placeholder="Student ID" required
                   name="studentId"></p>
-        <p><input id="jobId" class="dbfp-input dbfp-padding-16" type="text" placeholder="Job ID" required name="jobId">
+        <p><input id="jobId" class="form-control form-control-lg" type="text" placeholder="Job ID" required name="jobId">
         </p>
         <p>
           <button class="btn btn-primary" type="submit">

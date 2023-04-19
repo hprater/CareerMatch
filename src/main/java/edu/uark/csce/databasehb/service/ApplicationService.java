@@ -7,8 +7,8 @@ import edu.uark.csce.databasehb.model.major.Major;
 import edu.uark.csce.databasehb.model.major.MajorRepository;
 import edu.uark.csce.databasehb.model.student.Student;
 import edu.uark.csce.databasehb.model.student.StudentRepository;
-import edu.uark.csce.databasehb.web.application.ApplicationForm;
-import edu.uark.csce.databasehb.web.application.ViewApplicationForm;
+import edu.uark.csce.databasehb.web.application.AddApplicationForm;
+import edu.uark.csce.databasehb.web.application.ViewApplicationTable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,11 +28,11 @@ public class ApplicationService {
     }
 
 
-    public boolean addApplication(ApplicationForm form) {
+    public boolean addApplication(AddApplicationForm form) {
         return applicationRepo.addApplication(form);
     }
 
-    public List<ViewApplicationForm> getAllApplications() {
+    public List<ViewApplicationTable> getAllApplications() {
         return applicationRepo.getAllApplications();
     }
 
@@ -48,15 +48,15 @@ public class ApplicationService {
         return jobRepo.getAllJobs();
     }
 
-    public List<ViewApplicationForm> getApplicationByMajorId(int major) {
+    public List<ViewApplicationTable> getApplicationByMajorId(int major) {
         return applicationRepo.getApplicationByMajorId(major);
     }
 
-    public List<ViewApplicationForm> getApplicationByStudentId(long studentId) {
+    public List<ViewApplicationTable> getApplicationByStudentId(long studentId) {
         return applicationRepo.getApplicationByStudentId(studentId);
     }
 
-    public List<ViewApplicationForm> getApplicationByJobId(long jobId) {
+    public List<ViewApplicationTable> getApplicationByJobId(long jobId) {
         return applicationRepo.getApplicationByJobId(jobId);
     }
 }

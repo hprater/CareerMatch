@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @SuppressWarnings("SqlNoDataSourceInspection")
@@ -20,14 +21,14 @@ public class StudentRepository {
     public List<Student> getAllStudents() {
         List<Student> students = new ArrayList<>(template.query("SELECT * FROM students",
                 (rs, rowNum) -> new Student(rs.getLong("student_id"), rs.getString("student_name"), rs.getString("major_id"))));
-        return students.isEmpty() ? null : students;
+        return students.isEmpty() ? Collections.emptyList() : students;
     }
 
     public List<Student> getStudentsByMajor(int major) {
         List<Student> students = new ArrayList<>(template.query(
                         "SELECT student_id, student_name, major FROM students s, majors m WHERE s.major_id = m.major_id AND m.major_id = ?;",
                 (rs, rowNum) -> new Student(rs.getLong("student_id"), rs.getString("student_name"), rs.getString("major")), major));
-        return students.isEmpty() ? null : students;
+        return students.isEmpty() ? Collections.emptyList() : students;
     }
 
     public boolean addStudent(StudentForm form) {

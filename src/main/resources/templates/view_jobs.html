@@ -6,30 +6,23 @@
   <body class="dbfp-black">
     <div th:replace="~{fragments/navigation :: navigation}">Navigation goes here!</div>
     <main class="container">
-      <!-- Toast Message -->
-      <div th:if="${#lists.isEmpty(jobs)} and not ${initialLoad}"
-           class="alert alert-warning d-flex align-items-center alert-dismissible fade show" role="alert">
-        <i class="fa fa-fw fa-question-circle"></i>
-        <div>No results returned for the selected major</div>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-
+      <div th:replace="~{fragments/toast :: toast}"></div>
+      <br/>
       <h2 style="font-family:Castellar; font-size: 40px"> View all Jobs for Selected Major </h2>
-
       <form action="/viewJob" method="post">
         <div>
-          <select onchange="this.form.submit()" name="major" id="major" class="dbfp-input dbfp-padding-16">
-            <option selected disabled value="-1">Majors...</option>
-            <option th:each="major : ${majors}" th:value="${major.majorId}"
-                    th:text="${major.majorDescription} + ' (' + ${major.getMajor()} + ')'">Choose
+          <select onchange="this.form.submit()" th:field="${form.selectedMajor}" name="major" id="major" class="form-control form-control-lg">
+            <option disabled selected value="0">Select Major</option>
+            <option th:each="major : ${form.majorList}" th:value="${major.majorId}"
+                    th:text="${major.majorDescription} + ' (' + ${major.major} + ')'">Choose
             </option>
           </select>
         </div>
       </form>
-      <div th:if="${#lists.isEmpty(jobs)}">
+      <div th:if="${#lists.isEmpty(form.getJobList())}">
         <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
       </div>
-      <table class="dbfp-content-table" th:unless="${#lists.isEmpty(jobs)}">
+      <table class="dbfp-content-table" th:unless="${#lists.isEmpty(form.getJobList())}">
         <thead>
           <tr>
             <th>Job ID</th>
@@ -39,11 +32,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr th:each="job : ${jobs}">
-            <td th:text="${job.getId()}"></td>
-            <td th:text="${job.getCompanyName()}"></td>
-            <td th:text="${job.getJobTitle()}"></td>
-            <td th:text="${#numbers.formatCurrency(job.getSalary())}"></td>
+          <tr th:each="job : ${form.getJobList()}">
+            <td th:text="${job.id()}"></td>
+            <td th:text="${job.companyName()}"></td>
+            <td th:text="${job.jobTitle}"></td>
+            <td th:text="${#numbers.formatCurrency(job.salary)}"></td>
           </tr>
         </tbody>
       </table>
