@@ -20,6 +20,10 @@ public class ToastMessage {
         this.symbol = symbol;
     }
 
+    public void setCssClass(String baseCssAlert) {
+        cssClass = baseCssAlert + baseClass;
+    }
+
     public void setCssClass(String baseCssAlert, String symbolClass) {
         cssClass = baseCssAlert + baseClass;
         symbol = symbolClass;

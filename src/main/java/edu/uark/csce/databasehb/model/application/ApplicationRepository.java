@@ -10,7 +10,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("SqlNoDataSourceInspection")
 @Slf4j
 @Repository
 public class ApplicationRepository {
@@ -56,11 +55,11 @@ public class ApplicationRepository {
         return applications.isEmpty() ? null : applications;
     }
 
-    public Application getApplicationByStudentIdJobId(ApplicationForm form) {
-        List<Application> applications = new ArrayList<>(template.query("SELECT * FROM applications WHERE student_id = ? AND job_id = ?",
-                (rs, rowNum) -> new Application(rs.getInt("application_id"), rs.getLong("student_id"),
+    public JobApplication getApplicationByStudentIdJobId(ApplicationForm form) {
+        List<JobApplication> jobApplications = new ArrayList<>(template.query("SELECT * FROM applications WHERE student_id = ? AND job_id = ?",
+                (rs, rowNum) -> new JobApplication(rs.getInt("application_id"), rs.getLong("student_id"),
                         rs.getInt("job_id")), form.getStudentId(), form.getJobId()));
-        return applications.isEmpty() ? null : applications.get(0);
+        return jobApplications.isEmpty() ? null : jobApplications.get(0);
     }
 
     public boolean addApplication(ApplicationForm form) {
