@@ -43,15 +43,18 @@ public class JobController {
                 if (dive.getMessage().contains("Duplicate")) {
                     toast.setCssClass("alert alert-warning");
                     toast.setMessage("Job already exists");
+                    toast.setSymbol("fa-question-circle");
                 } else
                     toast.setMessage(dive.getMessage());
             } catch (Exception e) {
                 toast.setCssClass("alert alert-danger");
                 toast.setMessage(e.getMessage());
+                toast.setSymbol("fa-exclamation-triangle");
             }
         } else {
             toast.setCssClass("alert alert-warning");
             toast.setMessage("Invalid Value(s) in form");
+            toast.setSymbol("fa-question-circle");
         }
         log.info("Toast: {}", toast);
         model.addAttribute("toast", toast);

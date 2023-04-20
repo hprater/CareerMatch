@@ -23,14 +23,14 @@ public class JobRepository {
 
     public List<Job> getAllJobs() {
         List<Job> jobs = new ArrayList<>(template.query("SELECT * FROM jobs",
-                (rs, rowNum) -> new Job(rs.getLong("job_id"),rs.getInt("salary"), rs.getString("company_name"), rs.getString("job_title"))));
+                (rs, rowNum) -> new Job(rs.getLong("job_id"),rs.getLong("salary"), rs.getString("company_name"), rs.getString("job_title"))));
         return jobs;
     }
 
     public List<Job> getJobByMajor(int major) {
         List<Job> jobs = new ArrayList<>(template.query(
                 "SELECT j.job_id, company_name, job_title, salary, major_id FROM jobs j, job_majors m WHERE j.job_id = m.job_id AND m.major_id = ?;",
-                (rs, rowNum) -> new Job(rs.getLong("job_id"), rs.getInt("salary"), rs.getString("company_name"), rs.getString("job_title")), major));
+                (rs, rowNum) -> new Job(rs.getLong("job_id"), rs.getLong("salary"), rs.getString("company_name"), rs.getString("job_title")), major));
         return jobs;
     }
 
@@ -44,8 +44,8 @@ public class JobRepository {
             ps.setDouble(3, form.getSalary());
             return ps;
         }, keyHolder);
-        BigInteger jobId = (BigInteger) keyHolder.getKey();
-        return new Job(jobId.longValue(), form.getSalary(), form.getCompanyName(), form.getJobTitle());
+        Long jobId = (Long) keyHolder.getKey();
+        return new Job(jobId, form.getSalary(), form.getCompanyName(), form.getJobTitle());
     }
 
     public Long getJobID(JobForm form) {
