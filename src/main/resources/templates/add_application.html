@@ -12,7 +12,7 @@
         <select th:field="${form.selectedStudent}" class="form-control form-control-lg">
           <option disabled selected value="0">Select Student ID</option>
           <option th:each="students : ${form.studentList}" th:value="${students.id}"
-                  th:text="${students.id} + ' (' + ${students.studentName} + ')'">Choose
+                  th:text="${#numbers.formatInteger(students.id,9)} + ' (' + ${students.studentName} + ')'">Choose
           </option>
         </select>
         </p>

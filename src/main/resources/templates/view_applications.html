@@ -41,7 +41,7 @@
                   class="form-control form-control-lg">
             <option disabled selected value="0">Select Student</option>
             <option th:each="student : ${form.studentList}" th:value="${student.id}"
-                    th:text="${student.id()} + ' (' + ${student.studentName()} + ')'"></option>
+                    th:text="${#numbers.formatInteger(student.id,9)} + ' (' + ${student.studentName()} + ')'"></option>
           </select>
         </div>
         <div th:if="${form.searchMethod==4}">
