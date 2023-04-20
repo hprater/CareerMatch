@@ -35,10 +35,10 @@ public class StudentForm {
     //create method check if inputs are valid.boolean
     public boolean isValid() {
         // Ensure studentId was entered as a number
-        if(this.studentId < 1) return false;
+        if(this.studentId < 1 || String.valueOf(this.studentId).length() > 9) return false;
 
         // Check for studentName validity
-        if(isBlank(this.studentName) || !isAlpha(this.studentName)) return false;
+        if(isBlank(this.studentName) || !isAlpha(this.studentName) || this.studentName.length() > 55) return false;
 
         // Check for major validity
         if(this.major < 1) return false;

@@ -15,9 +15,12 @@ public class JobForm {
 
     //create method check if inputs are valid.boolean
     public Boolean isValid() {
-        if(isBlank(this.jobTitle) || !isAlpha(this.jobTitle)) return false;
+        if(isBlank(this.jobTitle) || !isAlpha(this.jobTitle) || this.jobTitle.length() > 55) return false;
 
-        if(isBlank(this.companyName) || !isAlpha(this.companyName)) return false;
+        if(isBlank(this.companyName) || !isAlpha(this.companyName) || this.companyName.length() > 55) return false;
+
+        if(String.valueOf(this.salary).length() > 7) return false;
+
         return true;
     }
 }
