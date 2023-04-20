@@ -3,7 +3,7 @@
   <head th:replace="~{fragments/header :: header}"><title>None</title></head>
   <body class="dbfp-black">
     <div th:replace="~{fragments/navigation :: navigation}">Navigation goes here!</div>
-    <main class="container">
+    <div class="dbfp-padding-large" id="main">
       <div th:replace="~{fragments/toast :: toast}"></div>
       <br/>
       <h2 style="font-family:Castellar; font-size: 40px"> Add Application </h2>
@@ -31,7 +31,7 @@
         </p>
       </form>
       <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
-    </main>
+    </div>
     <div th:replace="~{fragments/footer :: footer}">Footer goes here!</div>
   </body>
 </html>

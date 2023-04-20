@@ -5,7 +5,7 @@
   </head>
   <body class="dbfp-black">
     <div th:replace="~{fragments/navigation :: navigation}">Navigation goes here!</div>
-    <main class="container">
+    <div class="dbfp-padding-large" id="main">
       <!-- Toast Message -->
       <div th:replace="~{fragments/toast :: toast}"></div>
       <br/>
@@ -32,7 +32,7 @@
         </p>
       </form>
       <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
-    </main>
+    </div>
     <div th:replace="~{fragments/footer :: footer}">Footer goes here!</div>
   </body>
 </html>
