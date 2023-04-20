@@ -31,6 +31,7 @@ public class Initialize {
         jdbcTemplate.execute("INSERT INTO students(student_id, student_name, major_id) VALUES (010931631, 'Hayden Prater', 3), (010852905, 'Bailey Grimes', 3);");
 
         jdbcTemplate.execute("CREATE TABLE jobs(job_id INT NOT NULL AUTO_INCREMENT, company_name VARCHAR(55), job_title VARCHAR(55), salary INT DEFAULT 0, PRIMARY KEY (job_id));");
+        jdbcTemplate.execute("CREATE UNIQUE INDEX job_info ON jobs (company_name, job_title, salary);");
         jdbcTemplate.execute("INSERT INTO jobs(company_name, job_title, salary) VALUES ('Walmart','Software Engineer I', 70000), ('JB Hunt', 'Software Engineer I', 60000);");
 
         jdbcTemplate.execute("CREATE TABLE job_majors(job_id INT NOT NULL, major_id INT NOT NULL, PRIMARY KEY (job_id, major_id), FOREIGN KEY (job_id) REFERENCES jobs(job_id), FOREIGN KEY (major_id) REFERENCES majors(major_id));");

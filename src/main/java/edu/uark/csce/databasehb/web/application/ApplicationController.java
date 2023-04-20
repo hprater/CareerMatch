@@ -34,7 +34,7 @@ public class ApplicationController {
     public String addApplication(@ModelAttribute AddApplicationForm form, Model model) {
         ToastMessage toast = new ToastMessage();
         log.info("FORM : {}", form);
-        if(form.getSelectedStudent() < 1 || form.getSelectedJob() < 1) {
+        if (form.getSelectedStudent() < 1 || form.getSelectedJob() < 1) {
             toast.setMessage("Please make a selection from both dropdowns");
             toast.setCssClass("alert-warning", "fa-question-circle");
         } else {
@@ -42,8 +42,15 @@ public class ApplicationController {
                 service.addApplication(form);
                 toast.setMessage("Application added/updated in database");
             } catch (Exception e) {
+
                 toast.setCssClass("alert-danger", "fa-exclamation-triangle");
-                toast.setMessage(e.getMessage());
+                if (e.getMessage().contains("Duplicate")) {
+                    toast.setMessage("Application already exists");
+                    toast.setSymbol("fa-question-circle");
+                    toast.setCssClass("alert-warning");
+                }
+                else
+                    toast.setMessage(e.getMessage());
             }
         }
         model.addAttribute("toast", toast);

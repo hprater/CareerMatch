@@ -40,8 +40,11 @@ public class JobController {
                 service.addJob(form);
                 toast.setMessage(form.getCompanyName() + " has been added to the database");
             } catch (DataIntegrityViolationException dive) {
-                toast.setCssClass("alert alert-warning");
-                toast.setMessage("Job already exists in the database");
+                if (dive.getMessage().contains("Duplicate")) {
+                    toast.setCssClass("alert alert-warning");
+                    toast.setMessage("Job already exists");
+                } else
+                    toast.setMessage(dive.getMessage());
             } catch (Exception e) {
                 toast.setCssClass("alert alert-danger");
                 toast.setMessage(e.getMessage());
@@ -72,7 +75,7 @@ public class JobController {
         form.getJobList().clear();
         form.setMajorList(service.getAllMajors());
         form.setJobList(service.getJobByMajor(form.getSelectedMajor()));
-        if(form.getJobList().isEmpty())
+        if (form.getJobList().isEmpty())
             model.addAttribute("toast", getEmptyToast());
         model.addAttribute("form", form);
         model.addAttribute("viewName", "view_jobs");
