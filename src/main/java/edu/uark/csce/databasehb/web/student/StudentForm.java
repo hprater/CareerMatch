@@ -1,7 +1,6 @@
 package edu.uark.csce.databasehb.web.student;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNumeric;
 
 public class StudentForm {
     private Integer studentId;

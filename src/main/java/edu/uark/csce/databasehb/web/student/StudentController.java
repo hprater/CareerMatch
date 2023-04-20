@@ -2,7 +2,6 @@ package edu.uark.csce.databasehb.web.student;
 
 import edu.uark.csce.databasehb.model.ToastMessage;
 import edu.uark.csce.databasehb.model.major.Major;
-import edu.uark.csce.databasehb.model.student.Student;
 import edu.uark.csce.databasehb.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
