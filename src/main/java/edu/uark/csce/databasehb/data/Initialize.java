@@ -34,7 +34,7 @@ public class Initialize {
         jdbcTemplate.execute("INSERT INTO jobs(company_name, job_title, salary) VALUES ('Walmart','Software Engineer I', 70000), ('JB Hunt', 'Software Engineer I', 60000);");
 
         jdbcTemplate.execute("CREATE TABLE job_majors(job_id INT NOT NULL, major_id INT NOT NULL, PRIMARY KEY (job_id, major_id), FOREIGN KEY (job_id) REFERENCES jobs(job_id), FOREIGN KEY (major_id) REFERENCES majors(major_id));");
-        jdbcTemplate.execute("INSERT INTO job_majors(job_id, major_id) VALUES (1, 2), (1,3), (2,2), (2,3);");
+        jdbcTemplate.execute("INSERT INTO job_majors(job_id, major_id) VALUES (1, 2), (2,2);");
 
         jdbcTemplate.execute("CREATE TABLE applications(student_id INT NOT NULL, job_id INT NOT NULL, PRIMARY KEY (student_id,job_id), FOREIGN KEY (student_id) REFERENCES students(student_id), FOREIGN KEY (job_id) REFERENCES jobs(job_id));");
         jdbcTemplate.execute("INSERT INTO applications(student_id, job_id) VALUES (010931631, 1), (010852905, 2);");
