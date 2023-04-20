@@ -39,11 +39,21 @@ public class StudentController {
     @PostMapping("/addStudent")
     public String addStudent(@ModelAttribute StudentForm form, BindingResult br, Model model) {
         model.addAttribute("form", form);
+        ToastMessage toast = new ToastMessage();
         if (br.hasErrors()) {
             log.error("ERROR!! {}", br.getErrorCount());
+            toast.setCssClass("alert-warning");
+            toast.setSymbol("fa-exclamation-triangle");
+            toast.setMessage("Invalid Value(s) in form");
+            model.addAttribute("toast", toast);
+            List<Major> majors = service.getAllMajors();
+            StudentForm formA = new StudentForm();
+            form.setMajor(0);
+            model.addAttribute("form", formA);
+            model.addAttribute("majors", majors);
+            model.addAttribute("viewName", "add_student");
             return "add_student";
         }
-        ToastMessage toast = new ToastMessage();
         if (form.isValid()) {
             try {
                 boolean duplicateValue = service.addStudent(form);
