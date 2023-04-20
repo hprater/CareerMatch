@@ -1,5 +1,6 @@
 package edu.uark.csce.databasehb.web.student;
 
+import static org.apache.commons.lang3.StringUtils.isAlpha;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class StudentForm {
@@ -37,7 +38,7 @@ public class StudentForm {
         if(this.studentId < 1) return false;
 
         // Check for studentName validity
-        if(isBlank(this.studentName) || this.studentName.contains(";")) return false;
+        if(isBlank(this.studentName) || !isAlpha(this.studentName)) return false;
 
         // Check for major validity
         if(this.major < 1) return false;
