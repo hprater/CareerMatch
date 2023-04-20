@@ -1,6 +1,7 @@
 package edu.uark.csce.databasehb.web.student;
 
 import static org.apache.commons.lang3.StringUtils.isAlpha;
+import static org.apache.commons.lang3.StringUtils.isAlphaSpace;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class StudentForm {
@@ -38,7 +39,7 @@ public class StudentForm {
         if(this.studentId < 1 || String.valueOf(this.studentId).length() > 9) return false;
 
         // Check for studentName validity
-        if(isBlank(this.studentName) || !isAlpha(this.studentName) || this.studentName.length() > 55) return false;
+        if(isBlank(this.studentName) || !isAlphaSpace(this.studentName) || this.studentName.length() > 55) return false;
 
         // Check for major validity
         if(this.major < 1) return false;
