@@ -2,6 +2,7 @@ package edu.uark.csce.databasehb.web.student;
 
 import edu.uark.csce.databasehb.model.ToastMessage;
 import edu.uark.csce.databasehb.model.major.Major;
+import edu.uark.csce.databasehb.model.student.Student;
 import edu.uark.csce.databasehb.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -100,6 +101,13 @@ public class StudentController {
         model.addAttribute("form", form);
         model.addAttribute("viewName", "view_students");
         return "view_students";
+    }
+
+    @GetMapping("/viewAllNoAppStudents")
+    public String viewAllNoAppStudents(Model model){
+        List<Student> students = service.getAllNoAppStudents();
+        model.addAttribute("studentList", students);
+        return "view_all_no_app_students";
     }
 
 }

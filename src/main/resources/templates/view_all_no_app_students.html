@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header}">
+    <title>DB Final Project</title>
+</head>
+<body class="dbfp-black">
+<div th:replace="~{fragments/navigation :: navigation}">Navigation goes here!</div>
+<div class="dbfp-padding-large" id="main">
+    <div th:replace="~{fragments/toast :: toast}"></div>
+    <br/>
+    <div class="dbfp-mid-mypic">
+        <h2 style="font-family:Castellar; font-size: 40px"> View all Students with no Application </h2>
+    </div>
+
+    <table class="dbfp-content-table">
+        <thead>
+        <tr>
+            <th>Student ID</th>
+            <th>Student Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student : ${studentList}">
+            <td th:text="${student.id()}"></td>
+            <td th:text="${student.studentName()}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:if="${#lists.isEmpty(studentList)}">
+        <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
+    </div>
+</div>
+<div th:replace="~{fragments/footer :: footer}">Footer goes here!</div>
+</body>
+</html>

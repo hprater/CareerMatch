@@ -7,6 +7,7 @@ import edu.uark.csce.databasehb.model.student.StudentRepository;
 import edu.uark.csce.databasehb.web.student.StudentForm;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,6 +26,10 @@ public class StudentService {
 
     public List<Student> getStudentsByMajor(Integer major) {
         return repo.getStudentsByMajor(major);
+    }
+
+    public List<Student> getAllNoAppStudents(){
+        return new ArrayList<>(); // Will eventually return a return from a studentRepo method (query)
     }
 
     public boolean addStudent(StudentForm form) {
