@@ -9,7 +9,8 @@
     <!-- Top of Web Page Header >-->
     <div class="dbfp-padding-large" id="main">
       <div th:replace="~{fragments/toast :: toast}"></div>
-      <br/>
+      <br>
+      <div class = "dbfp-mid-mypic">
       <h2 style="font-family:Castellar; font-size: 40px"> View Applications </h2>
       <!-- Dropdown to select search method>-->
       <form action="/viewApplication" method="post">
@@ -24,7 +25,7 @@
           </select>
         </div>
       </form>
-      <br>
+        <p></p>
 
       <!-- View Applications Dropdown / Output Table>-->
       <form th:if="${form.searchMethod>1}" action="/viewApplication" method="post">
@@ -53,6 +54,7 @@
           </select>
         </div>
       </form>
+        </div>
       <div th:if="${#lists.isEmpty(form.getApplicationTableList())}">
         <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
       </div>

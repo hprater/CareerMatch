@@ -8,6 +8,7 @@
     <div class="dbfp-padding-large" id="main">
       <div th:replace="~{fragments/toast :: toast}"></div>
       <br/>
+      <div class = "dbfp-mid-mypic">
       <h2 style="font-family:Castellar; font-size: 40px"> View all Jobs for Selected Major </h2>
       <form action="/viewJob" method="post">
         <div>
@@ -19,6 +20,8 @@
           </select>
         </div>
       </form>
+        <p></p>
+        </div>
       <div th:if="${#lists.isEmpty(form.getJobList())}">
         <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
       </div>

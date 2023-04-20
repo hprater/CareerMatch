@@ -9,19 +9,20 @@
         <!-- Toast Message -->
       <div th:replace="~{fragments/toast :: toast}"></div>
       <br/>
+      <div class = "dbfp-mid-mypic">
         <h2 style="font-family:Castellar; font-size: 40px"> Add Student</h2>
         <form action="/addStudent" method="post">
           <div class="form-group">
             <input id="studentId" placeholder="Student ID" th:value="${form.studentId}" class="form-control form-control-lg" type="number" required
                    name="studentId">
           </div>
-          <br/>
+          <p></p>
           <div class="form-group">
             <input id="studentName" placeholder="Student Name" th:value="${form.studentName}" class="form-control form-control-lg" type="text"
                    required
                    name="studentName">
           </div>
-          <br/>
+          <p></p>
           <div class="form-group">
             <select name="major" id="major" th:value="${form.major}" class="form-control form-control-lg">
               <option disabled selected value="0">Select Major</option>
@@ -31,13 +32,14 @@
               </option>
             </select>
           </div>
-          <br/>
+          <p></p>
           <div class="form-group">
             <button class="btn btn-primary" type="submit">
               <i class="fa fa-paper-plane"></i>Submit
             </button>
           </div>
         </form>
+      </div>
         <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
       </div>
     <div th:replace="~{fragments/footer :: footer}">Footer goes here!</div>

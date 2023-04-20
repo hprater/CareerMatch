@@ -9,6 +9,7 @@
       <!-- Toast Message -->
       <div th:replace="~{fragments/toast :: toast}"></div>
       <br/>
+      <div class = "dbfp-mid-mypic">
       <h2 style="font-family:Castellar; font-size: 40px"> Add Job</h2>
       <form action="/addJob" method="post">
         <p><input id="companyName" class="form-control form-control-lg" type="text" placeholder="Company Name" required
@@ -31,6 +32,7 @@
           </button>
         </p>
       </form>
+      </div>
       <img src="images/hog.jpg" style="width:50%" class="dbfp-mid-mypic">
     </div>
     <div th:replace="~{fragments/footer :: footer}">Footer goes here!</div>
