@@ -107,6 +107,7 @@ public class StudentController {
     public String viewAllNoAppStudents(Model model){
         List<Student> students = service.getAllNoAppStudents();
         model.addAttribute("studentList", students);
+        model.addAttribute("viewName", "view_no_app");
         return "view_all_no_app_students";
     }
 

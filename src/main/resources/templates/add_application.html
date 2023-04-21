@@ -21,7 +21,7 @@
           <select th:field="${form.selectedJob}" class="form-control form-control-lg">
             <option disabled selected value="0">Select Job ID</option>
             <option th:each="jobs : ${form.getJobList()}" th:value="${jobs.id}"
-                    th:text="${jobs.companyName()} + ' (' + ${jobs.jobTitle} + ')'">Choose
+                    th:text="${jobs.id()} + ' (' + ${jobs.companyName()} + ', ' + ${jobs.jobTitle} + ')'">Choose
             </option>
           </select>
         </p>
