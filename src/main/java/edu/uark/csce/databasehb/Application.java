@@ -1,3 +1,5 @@
+// Authors: Bailey Grimes and Hayden Prater
+
 package edu.uark.csce.databasehb;
 
 import org.springframework.boot.SpringApplication;
