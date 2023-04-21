@@ -25,10 +25,6 @@
         <i class="fa fa-eye dbfp-xxlarge"></i>
         <p>VIEW STUDENTS</p>
       </a>
-      <a href="/viewAllNoAppStudents" class="dbfp-bar-item dbfp-button dbfp-padding-large" th:classappend="${viewName == 'view_all_no_app_students'} ? dbfp-black : dbfp-hover-black">
-        <i class="fa fa-eye dbfp-xxlarge"></i>
-        <p>VIEW STUDENTS WITH NO APPLICATION</p>
-      </a>
       <a href="/viewJob" class="dbfp-bar-item dbfp-button dbfp-padding-large" th:classappend="${viewName == 'view_jobs'} ? dbfp-black : dbfp-hover-black">
         <i class="fa fa-eye dbfp-xxlarge"></i>
         <p>VIEW JOBS</p>
@@ -36,6 +32,10 @@
       <a href="/viewApplication" class="dbfp-bar-item dbfp-button dbfp-padding-large" th:classappend="${viewName == 'view_applications'} ? dbfp-black : dbfp-hover-black">
         <i class="fa fa-eye dbfp-xxlarge"></i>
         <p>VIEW APPLICATIONS</p>
+      </a>
+      <a href="/viewAllNoAppStudents" class="dbfp-bar-item dbfp-button dbfp-padding-large" th:classappend="${viewName == 'view_all_no_app_students'} ? dbfp-black : dbfp-hover-black">
+        <i class="fa fa-eye dbfp-xxlarge"></i>
+        <p>STUDENTS W/O APPLICATION</p>
       </a>
     </nav>
   </body>

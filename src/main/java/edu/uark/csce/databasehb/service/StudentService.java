@@ -29,7 +29,7 @@ public class StudentService {
     }
 
     public List<Student> getAllNoAppStudents(){
-        return new ArrayList<>(); // Will eventually return a return from a studentRepo method (query)
+        return repo.getAllStudentsWithNoApp(); // Will eventually return a return from a studentRepo method (query)
     }
 
     public boolean addStudent(StudentForm form) {

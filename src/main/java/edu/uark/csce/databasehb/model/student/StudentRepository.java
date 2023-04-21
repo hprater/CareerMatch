@@ -26,7 +26,7 @@ public class StudentRepository {
 
     public List<Student> getStudentsByMajor(int major) {
         List<Student> students = new ArrayList<>(template.query(
-                        "SELECT student_id, student_name, major FROM students s, majors m WHERE s.major_id = m.major_id AND m.major_id = ?;",
+                "SELECT student_id, student_name, major FROM students s, majors m WHERE s.major_id = m.major_id AND m.major_id = ?;",
                 (rs, rowNum) -> new Student(rs.getLong("student_id"), rs.getString("student_name"), rs.getString("major")), major));
         return students.isEmpty() ? Collections.emptyList() : students;
     }
@@ -39,5 +39,13 @@ public class StudentRepository {
             template.update("UPDATE students SET student_name = ?, major_id = ? WHERE student_id = ?", form.getStudentName(), form.getMajor(), form.getStudentId());
             return true;
         }
+    }
+
+    public List<Student> getAllStudentsWithNoApp() {
+        List<Student> students = new ArrayList<>(template.query(
+                "SELECT s.student_id, s.student_name, s.major_id From students s " +
+                        "WHERE NOT EXISTS(SELECT * FROM applications a WHERE a.student_id = s.student_id);",
+                (rs, rowNum) -> new Student(rs.getLong("student_id"), rs.getString("student_name"), rs.getString("major_id"))));
+        return students.isEmpty() ? Collections.emptyList() : students;
     }
 }
